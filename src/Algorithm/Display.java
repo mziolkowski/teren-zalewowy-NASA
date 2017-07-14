@@ -3,11 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class Display extends Algorithm {
-	public void Displaying(Integer[][] netMap2, Boolean[][] booleanNetMap2, String[][] waterDirection2) throws FileNotFoundException {
+public class Display {
+	public static void displaying(Integer[][] netMap2, Boolean[][] booleanNetMap2, String[][] waterDirection2) throws FileNotFoundException {
 		
-		PrintWriter zapis = new PrintWriter("Mapa terenu.txt");
-		File plik = new File("Mapa terenu.txt");
 		System.out.println(" ");
 		System.out.println("TABLICA netMap");
 		for(int m = 0; m < netMap2.length; m++) {

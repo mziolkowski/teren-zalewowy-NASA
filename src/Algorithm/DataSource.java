@@ -10,19 +10,13 @@ public class DataSource {
 	int lbwsp_geo_lat;					// szerokosc geo. lewego-gornego rogu analizowanego obszaru
 	int lbwsp_geo_lon;					// dlugosc geo. lewego-gornego rogu analizowanego obszaru
 	int swsp_geo;						// wysokosc zr. wody
-	int hs;								// wysokosc poczatkowa zr. wody
-	int he;								// wysokosc koncowa zr. wody
-	int interwal; 						// interwal przyrostu wody
 	int length_tab;						//dlugosc tablicy
 	int width_tab;						//szerokosc tablicy
 	int tmpSlat;
 	int tmpSlon;	
 	
-public DataSource() {
-	Map();
-}
 
-protected void Map() {
+public DataSource makeData() {
 	
 	Scanner scan = new Scanner(System.in);
 		//Wskazanie lewego-dolnego punktu
@@ -91,6 +85,8 @@ protected void Map() {
 		
 		slat = rtwsp_geo_lat - tmpSlat;
 		slon = rtwsp_geo_lon - tmpSlon;
+		
+		return this;
 	
 	}
 

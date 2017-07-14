@@ -1,12 +1,21 @@
 package Algorithm;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
-public class Maps extends DataSource{
+public class Maps {
 	
-	protected ArrayList<Integer> CoordinateList() {
+	DataSource data;
+	
+	public Maps(DataSource data) {
+		super();
+		this.data = data;
+	}
+
+	public static ArrayList<Integer> CoordinateList() {
 		ArrayList<Integer> list1 = new ArrayList<Integer>(16);
+
 		list1.add(-1);	// wiersz
 		list1.add(-1);	// kolumna
 		
@@ -35,22 +44,23 @@ public class Maps extends DataSource{
 	}
 	
 	//Tablica przechowywujaca wsp. punktow zalanych
-	protected ArrayList<Integer> WetPoints() {
+	protected ArrayList<Integer> wetPoints() {
 		ArrayList<Integer> wetList = new ArrayList<Integer>(16);
 		return wetList;
 	}
 	
 	//Tablica przechowywujaca zalane punkty (wartosc punktu)
-	protected ArrayList<Integer> ListOfPoints() {
+	protected ArrayList<Integer> listOfPoints() {
 		ArrayList<Integer> listOfPoints = new ArrayList<Integer>(16);
 		return listOfPoints;
 	}
 	
 	
 	
-	protected Integer[][] NetMap() {
+	public Integer[][] netMap() {
+		
 		Random gen = new Random();
-		Integer[][] netMap = new Integer[length_tab - 1][width_tab - 1];
+		Integer[][] netMap = new Integer[data.length_tab - 1][data.width_tab - 1];
 		
 		//Uzupelnienie tablicy losowymi liczbami
 		for(int i = 0; i <= netMap.length - 1; i++) { 
@@ -59,13 +69,13 @@ public class Maps extends DataSource{
 			}
 		}
 		
-		netMap[slat][slon] = swsp_geo;
+		netMap[data.slat][data.slon] = data.swsp_geo;
 		return netMap;
 	}
 	
 	
-	protected Boolean[][] BooleanNetMap() {
-		Boolean[][] booleanNetMap = new Boolean[length_tab - 1][width_tab - 1];
+	protected Boolean[][] booleanNetMap() {
+		Boolean[][] booleanNetMap = new Boolean[data.length_tab - 1][data.width_tab - 1];
 		
 		//Uzupelnienie tablicy losowymi liczbami
 		for(int i = 0; i <= booleanNetMap.length - 1; i++) { 
@@ -77,8 +87,8 @@ public class Maps extends DataSource{
 	}
 	
 	
-	protected String[][] WaterDirection() {
-			String[][] waterDirection = new String[length_tab - 1][width_tab - 1];
+	public String[][] createWaterTab() {
+			String[][] waterDirection = new String[data.length_tab - 1][data.width_tab - 1];
 		
 		//Uzupelnienie tablicy losowymi liczbami
 		for(int i = 0; i <= waterDirection.length - 1; i++) { 

@@ -4,9 +4,42 @@ package Algorithm;
 import java.util.ArrayList;
 
 
-public class Algorithm extends Maps{
+public class Algorithm {
 	
-	public void Calculation(Integer[][] netMap3, ArrayList<Integer> list2, ArrayList<Integer> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Integer> listOfPoints2, String[][] waterDirection2) {
+	private Maps maps;
+	private DataSource data;
+	private int slat; 							// szerokosc geo. zr. wody
+	private int slon;	
+	private int swsp_geo;
+	private String[][] wetPoints;
+	private int maxGeoLat;
+	private int minGeoLat;
+	private int maxGeoLon;
+	private int minGeoLon;
+	
+	public Algorithm() {
+		super();
+		init();
+	}
+	
+	private void init() {
+		data = new DataSource();
+		data.makeData();
+		this.maps = new Maps(data);
+		slat = data.slat;
+		slon = data.slon;
+		swsp_geo = data.swsp_geo;
+	}
+	
+	public PositionHolder getStartPosition() {
+		return new PositionHolder(slat, slon);
+	}
+
+	public String[][] getWetPoints() {
+		return wetPoints;
+	}
+
+	public void calculation(Integer[][] netMap3, ArrayList<Integer> list2, ArrayList<Integer> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Integer> listOfPoints2, String[][] waterDirection2) {
 		
 		bolleanNetMap3[(int) slat][(int) slon] = true;
 		waterDirection2[(int) slat][(int) slon] = "$";
@@ -32,7 +65,7 @@ public class Algorithm extends Maps{
 
 }
 
-public void Calculation2(Integer[][] netMap3, ArrayList<Integer> list2, ArrayList<Integer> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Integer> listOfPoints2, String[][] waterDirection2) {
+public void calculation2(Integer[][] netMap3, ArrayList<Integer> list2, ArrayList<Integer> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Integer> listOfPoints2, String[][] waterDirection2) {
 	
 	slat = wetList2.get(0);
 	slon = wetList2.get(1);
@@ -68,6 +101,43 @@ public void Calculation2(Integer[][] netMap3, ArrayList<Integer> list2, ArrayLis
 	System.out.println(listOfPoints2);
 	System.out.println(wetList2);
 	System.out.println(" ");
+	
+}
+
+public void startCalculation() {
+	Integer[][] netMap3 = maps.netMap();
+	ArrayList<Integer> list2 = maps.CoordinateList();
+	ArrayList<Integer> wetList2 = maps.wetPoints();
+	Boolean[][] bolleanNetMap3 = maps.booleanNetMap();
+	ArrayList<Integer> listOfPoints2 = maps.listOfPoints();
+	String[][] waterDirection2 = maps.createWaterTab();
+	
+	calculation(netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
+	do {
+	calculation2(netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
+	} while (listOfPoints2.isEmpty() == false && wetList2.isEmpty() == false);
+	
+	wetPoints = waterDirection2;
+}
+
+public SectorData maxMinLatLon() {
+	
+	if (data.rtwsp_geo_lat > data.lbwsp_geo_lat) {
+		maxGeoLat = data.rtwsp_geo_lat;
+		minGeoLat = data.lbwsp_geo_lat;
+	} else {
+		maxGeoLat = data.lbwsp_geo_lat;
+		minGeoLat = data.rtwsp_geo_lat;
+	}
+
+	if (data.rtwsp_geo_lon > data.lbwsp_geo_lon) {
+		maxGeoLon = data.rtwsp_geo_lon;
+		minGeoLon = data.lbwsp_geo_lon;
+	} else {
+		maxGeoLon = data.lbwsp_geo_lon;
+		minGeoLon = data.rtwsp_geo_lon;
+	}
+	return new SectorData(new PositionHolder(minGeoLat, minGeoLon), new PositionHolder(maxGeoLat, maxGeoLon));
 	
 }
 
