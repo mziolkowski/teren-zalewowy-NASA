@@ -55,12 +55,11 @@ public class Imagery {
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLat()),
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLon()),
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
-
-				BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-
-//				image.setRGB(0, 0, (Color.cyan.getRGB()));
-//				image.setRGB(5, 5, (Color.red.getRGB()));
-
+				
+				int width = dataHolder.getWidth_tab();
+				int height = dataHolder.getLength_tab();
+				
+				BufferedImage image = new BufferedImage(15, 15, BufferedImage.TYPE_INT_ARGB);
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {
@@ -69,21 +68,14 @@ public class Imagery {
 						
 						String[][] waterDirection = dataHolder.getWaterDirections();
 						ArrayList<Integer> list2 = dataHolder.getCoordinateList();
-						
-						System.out.println(" ");
-						System.out.println("TABLICA WaterDirection");
-						for(int m = 0; m < waterDirection.length; m++) {
-							for(int n = 0; n < waterDirection[m].length; n++) 
-								System.out.print(waterDirection[m][n] + " ");
-								System.out.println(" ");
-							
-						}
-
+					
 						// Add the SurfaceImage to a layer.
 						SurfaceImageLayer layer = new SurfaceImageLayer();
 						layer.setName("Imported Surface Image");
 						layer.setPickEnabled(false);
-
+						image.setRGB(dataHolder.getStartPosition().getLat(),dataHolder.getStartPosition().getLon(),(Color.red.getRGB()));
+						layer.addRenderable(surfaceImage);
+						
 						for (int i = 0; i <= waterDirection.length; i++) {
 							if (waterDirection[dataHolder.getStartPosition().getLat() - list2.get(i)][dataHolder.getStartPosition().getLon() - list2.get(i + 1)] == "#") {
 								image.setRGB(dataHolder.getStartPosition().getLat() - list2.get(i),dataHolder.getStartPosition().getLon() - list2.get(i + 1),(Color.blue.getRGB()));

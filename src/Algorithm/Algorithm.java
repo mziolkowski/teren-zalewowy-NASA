@@ -127,20 +127,20 @@ public void startCalculation() {
 
 public SectorData maxMinLatLon() {
 	
-	if (data.rtwsp_geo_lat > data.lbwsp_geo_lat) {
-		maxGeoLat = data.rtwsp_geo_lat;
-		minGeoLat = data.lbwsp_geo_lat;
+	if (data.rtwsp_geo_lat_source > data.lbwsp_geo_lat_source) {
+		maxGeoLat = data.rtwsp_geo_lat_source;
+		minGeoLat = data.lbwsp_geo_lat_source;
 	} else {
-		maxGeoLat = data.lbwsp_geo_lat;
-		minGeoLat = data.rtwsp_geo_lat;
+		maxGeoLat = data.lbwsp_geo_lat_source;
+		minGeoLat = data.rtwsp_geo_lat_source;
 	}
 
-	if (data.rtwsp_geo_lon > data.lbwsp_geo_lon) {
-		maxGeoLon = data.rtwsp_geo_lon;
-		minGeoLon = data.lbwsp_geo_lon;
+	if (data.rtwsp_geo_lon_source > data.lbwsp_geo_lon_source) {
+		maxGeoLon = data.rtwsp_geo_lon_source;
+		minGeoLon = data.lbwsp_geo_lon_source;
 	} else {
-		maxGeoLon = data.lbwsp_geo_lon;
-		minGeoLon = data.rtwsp_geo_lon;
+		maxGeoLon = data.lbwsp_geo_lon_source;
+		minGeoLon = data.rtwsp_geo_lon_source;
 	}
 	return new SectorData(new PositionHolder(minGeoLat, minGeoLon), new PositionHolder(maxGeoLat, maxGeoLon));
 	

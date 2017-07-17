@@ -9,9 +9,44 @@ public class DataHolder {
 	private ArrayList<Integer> coordinateList;
 	private int length_tab;
 	private int width_tab;
+	private int slatInter;
+	private int slonInter;
+	private int slat_source;
+	private int slon_source;
 	
 	
-	
+	public int getSlat_source() {
+		return slat_source;
+	}
+
+	public void setSlat_source(int slat_source) {
+		this.slat_source = slat_source;
+	}
+
+	public int getSlon_source() {
+		return slon_source;
+	}
+
+	public void setSlon_source(int slon_source) {
+		this.slon_source = slon_source;
+	}
+
+	public int getSlatInter() {
+		return slatInter;
+	}
+
+	public void setSlatInter(int slatInter) {
+		this.slatInter = slatInter;
+	}
+
+	public int getSlonInter() {
+		return slonInter;
+	}
+
+	public void setSlonInter(int slonInter) {
+		this.slonInter = slonInter;
+	}
+
 	public ArrayList<Integer> getCoordinateList() {
 		return coordinateList;
 	}

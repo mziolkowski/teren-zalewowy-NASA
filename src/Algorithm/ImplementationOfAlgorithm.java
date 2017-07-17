@@ -20,20 +20,7 @@ public class ImplementationOfAlgorithm {
 
 		ArrayList<Integer> coordinateList = algorithm.getCoordinateList();
 		String[][] waterDirection2 = algorithm.getWaterDirections();
-		
-		System.out.println(" ");
-		System.out.println("TABLICA WaterDirection");
-		for(int m = 0; m < waterDirection2.length; m++) {
-			for(int n = 0; n < waterDirection2[m].length; n++) 
-				System.out.print(waterDirection2[m][n] + " ");
-				System.out.println(" ");
-			
-		}
-		
-		System.out.println(" ");
-		System.out.println("TABLICA CoordinateList");
-		System.out.println(coordinateList);
-		
+				
 		return dataHolder;
 
 	}
