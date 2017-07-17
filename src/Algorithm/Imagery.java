@@ -23,11 +23,10 @@ import gov.nasa.worldwindx.examples.ApplicationTemplate;
 import gov.nasa.worldwindx.examples.util.ExampleUtil;
 
 public class Imagery {
-	private static DataHolder dataHolder;
+	
+	private static  DataHolder dataHolder;
 	
 	public static class AppFrame extends ApplicationTemplate.AppFrame {
-				
-		private Color red;
 
 		public AppFrame() {
 			// Show the WAIT cursor because the import may take a while.
@@ -37,7 +36,7 @@ public class Imagery {
 			// thread to avoid freezing the UI.
 			Thread t = new Thread(new Runnable() {
 				public void run() {
-					
+
 					setImagiery();
 
 					// Restore the cursor.
@@ -51,43 +50,48 @@ public class Imagery {
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public void setImagiery() {
 			try {
-			
-				Sector sector = new Sector(Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLat()), Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLat()),
-						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLon()), Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
+				
+				Sector sector = new Sector(Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLat()),
+						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLat()),
+						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLon()),
+						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
 
-				int width = dataHolder.getWidth_tab();
-				int height = dataHolder.getLength_tab();
-				
-//				BufferedImageRaster image = new BufferedImageRaster(width, height, 150, sector);
-								
 				BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-//				image.getWidth();
-//				image.getHeight();
-				image.setRGB(0,0,(Color.cyan.getRGB()));
-				image.setRGB(5,5,(Color.red.getRGB()));
-//				image.getGraphics();
-//				byte[] pixels = ((DataBufferByte)image.getRaster().getDataBuffer()).getData();
-				
+
+//				image.setRGB(0, 0, (Color.cyan.getRGB()));
+//				image.setRGB(5, 5, (Color.red.getRGB()));
+
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {
+					
 					public void run() {
-						String[][] waterDirection = dataHolder.getWetPoints();
+						
+						String[][] waterDirection = dataHolder.getWaterDirections();
 						ArrayList<Integer> list2 = dataHolder.getCoordinateList();
+						
+						System.out.println(" ");
+						System.out.println("TABLICA WaterDirection");
+						for(int m = 0; m < waterDirection.length; m++) {
+							for(int n = 0; n < waterDirection[m].length; n++) 
+								System.out.print(waterDirection[m][n] + " ");
+								System.out.println(" ");
+							
+						}
 
 						// Add the SurfaceImage to a layer.
 						SurfaceImageLayer layer = new SurfaceImageLayer();
 						layer.setName("Imported Surface Image");
 						layer.setPickEnabled(false);
-						layer.addRenderable(surfaceImage);
 
-//						for (int i = 0; i < waterDirection.length; i++) {
-//							if (waterDirection[dataHolder.getStartPosition().getLat() - list2.get(i)][dataHolder.getStartPosition().getLon() - list2.get(i + 1)] == "#") {
+						for (int i = 0; i <= waterDirection.length; i++) {
+							if (waterDirection[dataHolder.getStartPosition().getLat() - list2.get(i)][dataHolder.getStartPosition().getLon() - list2.get(i + 1)] == "#") {
+								image.setRGB(dataHolder.getStartPosition().getLat() - list2.get(i),dataHolder.getStartPosition().getLon() - list2.get(i + 1),(Color.blue.getRGB()));
+								layer.addRenderable(surfaceImage);
+							} else {
 //								layer.addRenderable(surfaceImage);
-//							} else {
-//								layer.addRenderable(surfaceImage);
-//							}
-//						}
+							}
+						}
 
 						// Add the layer to the model and update the
 						// application's layer panel.
@@ -95,6 +99,8 @@ public class Imagery {
 
 						// Set the view to look at the imported image.
 						ExampleUtil.goTo(getWwd(), sector);
+						
+						
 					}
 
 					private void insertBeforeCompass(WorldWindow wwd, SurfaceImageLayer layer) {
@@ -120,7 +126,7 @@ public class Imagery {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		ImplementationOfAlgorithm algorithm = new ImplementationOfAlgorithm();
-		dataHolder =algorithm.imp();
+		dataHolder = algorithm.imp();
 		ApplicationTemplate.start("Imagery", Imagery.AppFrame.class);
 	}
 

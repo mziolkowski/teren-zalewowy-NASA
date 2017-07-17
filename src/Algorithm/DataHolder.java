@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DataHolder {
 	private SectorData maxMinLatLon;
 	private PositionHolder startPosition;
-	private String[][] wetPoints;
+	private String[][] waterDirection;
 	private ArrayList<Integer> coordinateList;
 	private int length_tab;
 	private int width_tab;
@@ -44,8 +44,8 @@ public class DataHolder {
 		return startPosition;
 	}
 
-	public String[][] getWetPoints() {
-		return wetPoints;
+	public String[][] getWaterDirections() {
+		return waterDirection;
 	}
 
 	public void setMaxMinLatLon(SectorData maxMinLatLon) {
@@ -56,9 +56,10 @@ public class DataHolder {
 		this.startPosition = startPosition;
 	}
 
-	public void setWetPoints(String[][] wetPoints) {
-		this.wetPoints = wetPoints;
+	public void setWaterDirection(String[][] waterDirection) {
+		this.waterDirection = waterDirection;
 	}
+	
 	
 
 }

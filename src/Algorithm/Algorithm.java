@@ -3,15 +3,15 @@ package Algorithm;
 
 import java.util.ArrayList;
 
-
 public class Algorithm {
 	
 	private Maps maps;
 	private DataSource data;
-	private int slat; 							// szerokosc geo. zr. wody
+	private int slat; 						
 	private int slon;	
 	private int swsp_geo;
-	private String[][] wetPoints;
+	private String[][] waterDirection;
+	private ArrayList<Integer> coordinateList;
 	private int maxGeoLat;
 	private int minGeoLat;
 	private int maxGeoLon;
@@ -35,8 +35,12 @@ public class Algorithm {
 		return new PositionHolder(slat, slon);
 	}
 
-	public String[][] getWetPoints() {
-		return wetPoints;
+	public String[][] getWaterDirections() {
+		return waterDirection;
+	}
+
+	public ArrayList<Integer> getCoordinateList() {
+		return coordinateList;
 	}
 
 	public void calculation(Integer[][] netMap3, ArrayList<Integer> list2, ArrayList<Integer> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Integer> listOfPoints2, String[][] waterDirection2) {
@@ -117,7 +121,8 @@ public void startCalculation() {
 	calculation2(netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
 	} while (listOfPoints2.isEmpty() == false && wetList2.isEmpty() == false);
 	
-	wetPoints = waterDirection2;
+	waterDirection = waterDirection2;
+	coordinateList = list2;
 }
 
 public SectorData maxMinLatLon() {

@@ -1,7 +1,7 @@
 package Algorithm;
 
 public class PositionHolder {
-	private int lat; // szerokosc geo. zr. wody
+	private int lat; 
 	private int lon;
 
 	public PositionHolder(int lat, int lon) {
