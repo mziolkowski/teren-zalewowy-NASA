@@ -3,15 +3,12 @@ package Algorithm;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.DataBufferInt;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
 
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.data.BufferedImageRaster;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.layers.CompassLayer;
@@ -56,10 +53,8 @@ public class Imagery {
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLon()),
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
 				
-				int width = dataHolder.getWidth_tab();
-				int height = dataHolder.getLength_tab();
 				
-				BufferedImage image = new BufferedImage(15, 15, BufferedImage.TYPE_INT_ARGB);
+				BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {

@@ -20,7 +20,7 @@ public class DataSource {
 	int rtwsp_geo_lon_source;
 	int slat_source;
 	int slon_source;
-	
+
 
 public DataSource makeData() {
 	
@@ -31,12 +31,12 @@ public DataSource makeData() {
 		lbwsp_geo_lat_source = lbwsp_geo_lat;
 		System.out.println("Podaj dlugosc geograficzna lewego-gornego punkty");
 		lbwsp_geo_lon = scan.nextInt();
-		rtwsp_geo_lon_source = lbwsp_geo_lon;
+		lbwsp_geo_lon_source = lbwsp_geo_lon;
 		
 		//Wskazanie prawego-gornego punktu
 		System.out.println("Podaj szerokosc geograficzna prawego-dolnego punktu");
 		rtwsp_geo_lat = scan.nextInt();
-		lbwsp_geo_lat_source = rtwsp_geo_lat;
+		rtwsp_geo_lat_source = rtwsp_geo_lat;
 		System.out.println("Podaj dlugosc geograficzna prawego-dolnego punkty");
 		rtwsp_geo_lon = scan.nextInt();
 		rtwsp_geo_lon_source = rtwsp_geo_lon;
@@ -81,12 +81,12 @@ public DataSource makeData() {
 		}
 		
 
-		for(int i = slat; i <= rtwsp_geo_lat; i++) {
-			slatInter += 1;
+		for(float i = slat; i <= rtwsp_geo_lat; i++) {
+			slatInter++;
 		}
 		
-		for(int j = slon; j <= rtwsp_geo_lon; j++) {
-			slonInter += 1;
+		for(float j = slon; j <= rtwsp_geo_lon; j++) {
+			slonInter++;
 		}
 		
 		

@@ -3,13 +3,18 @@ package Algorithm;
 
 import java.util.ArrayList;
 
+import gov.nasa.worldwind.geom.LatLon;
+
 public class Algorithm {
 	
 	private Maps maps;
 	private DataSource data;
+	private ArrayList<LatLon> elev;
 	private int slat; 						
 	private int slon;	
 	private int swsp_geo;
+	private int lengthTab;						
+	private int widthTab;
 	private String[][] waterDirection;
 	private ArrayList<Integer> coordinateList;
 	private int maxGeoLat;
@@ -28,9 +33,19 @@ public class Algorithm {
 		this.maps = new Maps(data);
 		slat = data.slat;
 		slon = data.slon;
+		lengthTab = data.length_tab;
+		widthTab = data.width_tab;
 		swsp_geo = data.swsp_geo;
 	}
 	
+	public int getLengthTab() {
+		return lengthTab;
+	}
+
+	public int getWidthTab() {
+		return widthTab;
+	}
+
 	public PositionHolder getStartPosition() {
 		return new PositionHolder(slat, slon);
 	}

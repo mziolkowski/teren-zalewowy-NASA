@@ -9,13 +9,13 @@ public class DataHolder {
 	private ArrayList<Integer> coordinateList;
 	private int length_tab;
 	private int width_tab;
-	private int slatInter;
-	private int slonInter;
-	private int slat_source;
-	private int slon_source;
+	private float slatInter;
+	private float slonInter;
+	private float slat_source;
+	private float slon_source;
 	
 	
-	public int getSlat_source() {
+	public float getSlat_source() {
 		return slat_source;
 	}
 
@@ -23,7 +23,7 @@ public class DataHolder {
 		this.slat_source = slat_source;
 	}
 
-	public int getSlon_source() {
+	public float getSlon_source() {
 		return slon_source;
 	}
 
@@ -31,7 +31,7 @@ public class DataHolder {
 		this.slon_source = slon_source;
 	}
 
-	public int getSlatInter() {
+	public float getSlatInter() {
 		return slatInter;
 	}
 
@@ -39,7 +39,7 @@ public class DataHolder {
 		this.slatInter = slatInter;
 	}
 
-	public int getSlonInter() {
+	public float getSlonInter() {
 		return slonInter;
 	}
 
