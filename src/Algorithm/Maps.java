@@ -3,73 +3,84 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import gov.nasa.worldwind.WorldWindow;
+import gov.nasa.worldwind.geom.Angle;
+
 
 public class Maps {
 	
 	DataSource data;
+	WorldWindow wwd;
 	
-	public Maps(DataSource data) {
+	public Maps(DataSource data, WorldWindow wwd) {
 		super();
 		this.data = data;
+		this.wwd = wwd;
 	}
 
-	public static ArrayList<Integer> CoordinateList() {
-		ArrayList<Integer> list1 = new ArrayList<Integer>(16);
+	public static ArrayList<Double> CoordinateList() {
+		ArrayList<Double> list1 = new ArrayList<Double>(16);
 
-		list1.add(-1);	// wiersz
-		list1.add(-1);	// kolumna
+		list1.add(-0.001);	// wiersz
+		list1.add(-0.001);	// kolumna
 		
-		list1.add(-1);
-		list1.add(0);
+		list1.add(-0.001);
+		list1.add(0.000);
 		
-		list1.add(-1);
-		list1.add(1);
+		list1.add(-0.001);
+		list1.add(0.001);
 	///////////////////////////////	
-		list1.add(0);
-		list1.add(-1);
+		list1.add(0.000);
+		list1.add(-0.001);
 		
-		list1.add(0);
-		list1.add(1);
+		list1.add(0.000);
+		list1.add(0.001);
 	///////////////////////////////	
-		list1.add(1);
-		list1.add(-1);
+		list1.add(0.001);
+		list1.add(-0.001);
 		
-		list1.add(1);
-		list1.add(0);
+		list1.add(0.001);
+		list1.add(0.000);
 		
-		list1.add(1);
-		list1.add(1);
+		list1.add(0.001);
+		list1.add(0.001);
 		
 		return list1;
 	}
 	
 	//Tablica przechowywujaca wsp. punktow zalanych
-	protected ArrayList<Integer> wetPoints() {
-		ArrayList<Integer> wetList = new ArrayList<Integer>(16);
+	protected ArrayList<Double> wetPoints() {
+		ArrayList<Double> wetList = new ArrayList<Double>(16);
 		return wetList;
 	}
 	
 	//Tablica przechowywujaca zalane punkty (wartosc punktu)
-	protected ArrayList<Integer> listOfPoints() {
-		ArrayList<Integer> listOfPoints = new ArrayList<Integer>(16);
+	protected ArrayList<Double> listOfPoints() {
+		ArrayList<Double> listOfPoints = new ArrayList<Double>(16);
 		return listOfPoints;
 	}
 	
 	
 	
-	public Integer[][] netMap() {
+	public Double[][] netMap() {
 		
-		Random gen = new Random();
-		Integer[][] netMap = new Integer[data.length_tab - 1][data.width_tab - 1];
+//		Random gen = new Random();
+		Double[][] netMap = new Double[data.length_tab - 1][data.width_tab - 1];
 		
-		//Uzupelnienie tablicy losowymi liczbami
 		for(int i = 0; i <= netMap.length - 1; i++) { 
 			for(int j = 0; j <= netMap.length - 1; j++) {
-				netMap[i][j] = gen.nextInt(9);
+				netMap[i][j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.slat_source + i), Angle.fromDegrees(data.slon_source + j));
 			}
 		}
 		
-		netMap[data.slat][data.slon] = data.swsp_geo;
+		//Uzupelnienie tablicy losowymi liczbami
+//		for(int i = 0; i <= netMap.length - 1; i++) { 
+//			for(int j = 0; j <= netMap.length - 1; j++) {
+////				netMap[i][j] = gen.nextInt(9);
+//			}
+//		}
+		
+//		netMap[data.slat][data.slon] = data.swsp_geo;
 		return netMap;
 	}
 	

@@ -6,21 +6,21 @@ public class DataHolder {
 	private SectorData maxMinLatLon;
 	private PositionHolder startPosition;
 	private String[][] waterDirection;
-	private ArrayList<Integer> coordinateList;
+	private ArrayList<Double> coordinateList;
 	private int length_tab;
 	private int width_tab;
-	private float slatInter;
-	private float slonInter;
+	private double slatInter;
+	private double slonInter;
 	private double slat_source;
 	private double slon_source;
-	private int swsp_geo;
+	private double swsp_geo;
 		
 	
-	public int getSwsp_geo() {
+	public double getSwsp_geo() {
 		return swsp_geo;
 	}
 
-	public void setSwsp_geo(int swsp_geo) {
+	public void setSwsp_geo(Double swsp_geo) {
 		this.swsp_geo = swsp_geo;
 	}
 
@@ -28,7 +28,7 @@ public class DataHolder {
 		return slat_source;
 	}
 
-	public void setSlat_source(int slat_source) {
+	public void setSlat_source(Double slat_source) {
 		this.slat_source = slat_source;
 	}
 
@@ -36,31 +36,31 @@ public class DataHolder {
 		return slon_source;
 	}
 
-	public void setSlon_source(int slon_source) {
+	public void setSlon_source(Double slon_source) {
 		this.slon_source = slon_source;
 	}
 
-	public float getSlatInter() {
+	public Double getSlatInter() {
 		return slatInter;
 	}
 
-	public void setSlatInter(int slatInter) {
+	public void setSlatInter(Double slatInter) {
 		this.slatInter = slatInter;
 	}
 
-	public float getSlonInter() {
+	public Double getSlonInter() {
 		return slonInter;
 	}
 
-	public void setSlonInter(int slonInter) {
+	public void setSlonInter(Double slonInter) {
 		this.slonInter = slonInter;
 	}
 
-	public ArrayList<Integer> getCoordinateList() {
+	public ArrayList<Double> getCoordinateList() {
 		return coordinateList;
 	}
 
-	public void setCoordinateList(ArrayList<Integer> coordinateList) {
+	public void setCoordinateList(ArrayList<Double> coordinateList) {
 		this.coordinateList = coordinateList;
 	}
 

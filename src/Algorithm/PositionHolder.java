@@ -1,16 +1,16 @@
 package Algorithm;
 
 public class PositionHolder {
-	private int lat; 
-	private int lon;
+	private double lat; 
+	private double lon;
 
-	public PositionHolder(int lat, int lon) {
+	public PositionHolder(double lat, double lon) {
 		super();
 		this.lat = lat;
 		this.lon = lon;
 	}
 
-	public int getLat() {
+	public double getLat() {
 		return lat;
 	}
 
@@ -18,7 +18,7 @@ public class PositionHolder {
 		this.lat = lat;
 	}
 
-	public int getLon() {
+	public double getLon() {
 		return lon;
 	}
 

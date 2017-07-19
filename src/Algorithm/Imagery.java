@@ -23,9 +23,12 @@ public class Imagery {
 	
 	private static  DataHolder dataHolder;
 	
+	
 	public static class AppFrame extends ApplicationTemplate.AppFrame {
 		
 		protected Elevation elevation;
+		protected Maps maps;
+		private DataSource data;
 		
 		public AppFrame() {
 			// Show the WAIT cursor because the import may take a while.
@@ -66,18 +69,18 @@ public class Imagery {
 					public void run() {
 						
 						String[][] waterDirection = dataHolder.getWaterDirections();
-						ArrayList<Integer> list2 = dataHolder.getCoordinateList();
+						ArrayList<Double> list2 = dataHolder.getCoordinateList();
 					
 						// Add the SurfaceImage to a layer.
 						SurfaceImageLayer layer = new SurfaceImageLayer();
 						layer.setName("Imported Surface Image");
 						layer.setPickEnabled(false);
-						image.setRGB(dataHolder.getStartPosition().getLat(),dataHolder.getStartPosition().getLon(),(Color.red.getRGB()));
+						image.setRGB((int) dataHolder.getStartPosition().getLat(),(int) dataHolder.getStartPosition().getLon(),(Color.red.getRGB()));
 						layer.addRenderable(surfaceImage);
 						
 						for (int i = 0; i <= waterDirection.length; i++) {
-							if (waterDirection[dataHolder.getStartPosition().getLat() - list2.get(i)][dataHolder.getStartPosition().getLon() - list2.get(i + 1)] == "#") {
-								image.setRGB(dataHolder.getStartPosition().getLat() - list2.get(i),dataHolder.getStartPosition().getLon() - list2.get(i + 1),(Color.blue.getRGB()));
+							if (waterDirection[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
+								image.setRGB((int)( dataHolder.getStartPosition().getLat() - list2.get(i)),(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1)),(Color.blue.getRGB()));
 								layer.addRenderable(surfaceImage);
 							} else {
 //								layer.addRenderable(surfaceImage);
