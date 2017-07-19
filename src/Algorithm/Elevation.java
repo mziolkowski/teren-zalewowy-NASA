@@ -10,9 +10,9 @@ import gov.nasa.worldwind.util.Logging;
 
 public class Elevation {
 
-	DataHolder dataHolder;
-	WorldWindow wwd;
-	// private DataSource data;
+	private DataHolder dataHolder;
+	private WorldWindow wwd;
+	double swsp_geo;
 
 	public Elevation(DataHolder dataHolder, WorldWindow wwd) {
 		super();
@@ -23,6 +23,9 @@ public class Elevation {
 
 	public void ElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
+		int[][] sourceWaterLatLon = new int[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
+		
+//		double swsp_geo_tmp = sourceWaterLatLon[(int) dataHolder.getSlat_source()][(int) dataHolder.getSlon_source()];
 
 
 		for (int i = 0; i < dataHolder.getLength_tab(); i++) {
@@ -50,7 +53,8 @@ public class Elevation {
 		}
 
 		Logging.logger().info(sb.toString());
-
+		swsp_geo = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(dataHolder.getSlat_source()), Angle.fromDegrees(dataHolder.getSlon_source()));
+		System.out.println(swsp_geo);
 	}
 
 }

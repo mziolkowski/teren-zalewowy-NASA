@@ -11,11 +11,20 @@ public class DataHolder {
 	private int width_tab;
 	private float slatInter;
 	private float slonInter;
-	private float slat_source;
-	private float slon_source;
+	private double slat_source;
+	private double slon_source;
+	private int swsp_geo;
+		
 	
-	
-	public float getSlat_source() {
+	public int getSwsp_geo() {
+		return swsp_geo;
+	}
+
+	public void setSwsp_geo(int swsp_geo) {
+		this.swsp_geo = swsp_geo;
+	}
+
+	public double getSlat_source() {
 		return slat_source;
 	}
 
@@ -23,7 +32,7 @@ public class DataHolder {
 		this.slat_source = slat_source;
 	}
 
-	public float getSlon_source() {
+	public double getSlon_source() {
 		return slon_source;
 	}
 

@@ -9,7 +9,6 @@ public class Algorithm {
 	
 	private Maps maps;
 	private DataSource data;
-	private ArrayList<LatLon> elev;
 	private int slat; 						
 	private int slon;	
 	private int swsp_geo;
@@ -21,6 +20,8 @@ public class Algorithm {
 	private int minGeoLat;
 	private int maxGeoLon;
 	private int minGeoLon;
+	private int slat_source;
+	private int slon_source;
 	
 	public Algorithm() {
 		super();
@@ -35,9 +36,21 @@ public class Algorithm {
 		slon = data.slon;
 		lengthTab = data.length_tab;
 		widthTab = data.width_tab;
+		slat_source = data.slat_source;
+		slon_source = data.slon_source;
+		
 		swsp_geo = data.swsp_geo;
 	}
 	
+	
+	public int getSlat_source() {
+		return slat_source;
+	}
+
+	public int getSlon_source() {
+		return slon_source;
+	}
+
 	public int getLengthTab() {
 		return lengthTab;
 	}
