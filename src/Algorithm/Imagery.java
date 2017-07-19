@@ -24,10 +24,14 @@ public class Imagery {
 	private static  DataHolder dataHolder;
 	
 	public static class AppFrame extends ApplicationTemplate.AppFrame {
-
+		
+		protected Elevation elevation;
+		
 		public AppFrame() {
 			// Show the WAIT cursor because the import may take a while.
 			this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			this.elevation = new Elevation(dataHolder, this.getWwd());
+			
 
 			// Import the imagery on a thread other than the event-dispatch
 			// thread to avoid freezing the UI.

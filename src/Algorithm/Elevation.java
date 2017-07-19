@@ -14,9 +14,11 @@ public class Elevation {
 	WorldWindow wwd;
 	// private DataSource data;
 
-	public Elevation(DataHolder dataHolder) {
+	public Elevation(DataHolder dataHolder, WorldWindow wwd) {
 		super();
 		this.dataHolder = dataHolder;
+		this.wwd = wwd;
+		ElevationMap();
 	}
 
 	public void ElevationMap() {
@@ -39,8 +41,8 @@ public class Elevation {
 
 		double targetResolution = Angle.fromDegrees(1d).radians / 3600;
 
-//		double resolutionAchieved = this.wwd.getModel().getGlobe().getElevationModel().getElevations(sector, latlons,
-//				targetResolution, elevations);
+		double resolutionAchieved = this.wwd.getModel().getGlobe().getElevationModel().getElevations(sector, latlons,
+				targetResolution, elevations);
 
 		StringBuffer sb = new StringBuffer();
 		for (double e : elevations) {
