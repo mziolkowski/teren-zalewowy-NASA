@@ -61,14 +61,15 @@ public class Imagery {
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
 				
 				
-				BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+				BufferedImage image = new BufferedImage(dataHolder.getLength_tab(), dataHolder.getWidth_tab(), BufferedImage.TYPE_INT_ARGB);
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {
 					
 					public void run() {
 						
-						String[][] waterDirection = dataHolder.getWaterDirections();
+//						String[][] waterDirection = dataHolder.getWaterDirections();
+						ArrayList<Double> wetListCopy = dataHolder.getWetListCopy();
 						ArrayList<Double> list2 = dataHolder.getCoordinateList();
 					
 						// Add the SurfaceImage to a layer.
@@ -78,8 +79,9 @@ public class Imagery {
 						image.setRGB((int) dataHolder.getStartPosition().getLat(),(int) dataHolder.getStartPosition().getLon(),(Color.red.getRGB()));
 						layer.addRenderable(surfaceImage);
 						
-						for (int i = 0; i <= waterDirection.length; i++) {
-							if (waterDirection[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
+						for (int i = 0; i <= wetListCopy.size(); i++) {
+							if (wetListCopy.get(i) < dataHolder.getSwsp_geo()) {
+//									[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
 								image.setRGB((int)( dataHolder.getStartPosition().getLat() - list2.get(i)),(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1)),(Color.blue.getRGB()));
 								layer.addRenderable(surfaceImage);
 							} else {

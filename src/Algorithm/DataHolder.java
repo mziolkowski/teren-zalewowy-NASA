@@ -6,6 +6,10 @@ public class DataHolder {
 	private SectorData maxMinLatLon;
 	private PositionHolder startPosition;
 	private String[][] waterDirection;
+	private ArrayList<Double> wetList;
+	private ArrayList<Double> wetListCopy;
+	private ArrayList<Double> listOfPoints;
+	private ArrayList<Double> listOfPointsCopy;
 	private ArrayList<Double> coordinateList;
 	private int length_tab;
 	private int width_tab;
@@ -16,6 +20,30 @@ public class DataHolder {
 	private double swsp_geo;
 		
 	
+	public ArrayList<Double> getWetListCopy() {
+		return wetListCopy;
+	}
+
+	public void setWetListCopy(ArrayList<Double> wetListCopy) {
+		this.wetListCopy = wetListCopy;
+	}
+
+	public ArrayList<Double> getListOfPointsCopy() {
+		return listOfPointsCopy;
+	}
+
+	public void setListOfPointsCopy(ArrayList<Double> listOfPointsCopy) {
+		this.listOfPointsCopy = listOfPointsCopy;
+	}
+
+	public ArrayList<Double> getWetList() {
+		return wetList;
+	}
+
+	public void setWetList(ArrayList<Double> wetList) {
+		this.wetList = wetList;
+	}
+
 	public double getSwsp_geo() {
 		return swsp_geo;
 	}

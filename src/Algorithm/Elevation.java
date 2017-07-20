@@ -21,16 +21,9 @@ public class Elevation {
 		ElevationMap();
 	}
 
-//	public double getSwsp_geo() {
-//		return swsp_geo;
-//	}
-
 	public void ElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 		Double[][] sourceWaterLatLon = new Double[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
-		
-//		double swsp_geo_tmp = sourceWaterLatLon[(int) dataHolder.getSlat_source()][(int) dataHolder.getSlon_source()];
-
 
 		for (int i = 0; i < dataHolder.getLength_tab(); i++) {
 			for (int j = 0; j < dataHolder.getWidth_tab(); j++) {
@@ -57,9 +50,6 @@ public class Elevation {
 		}
 
 		Logging.logger().info(sb.toString());
-//		swsp_geo = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(dataHolder.getSlat_source()), Angle.fromDegrees(dataHolder.getSlon_source()));
-//		dataHolder.setSwsp_geo(swsp_geo);
-//		System.out.println(swsp_geo);
 	}
 
 }

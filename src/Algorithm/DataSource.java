@@ -56,37 +56,37 @@ public DataSource makeData() {
 		//Okreslenie wymiaru tablicy
 		if(rtwsp_geo_lat < lbwsp_geo_lat) {
 			do{
-				rtwsp_geo_lat++;
+				rtwsp_geo_lat += 0.001;
 				length_tab = length_tab + 1;
 			}while (rtwsp_geo_lat <= lbwsp_geo_lat);
 			
 		} else {
 			do{
-				lbwsp_geo_lat++;
+				lbwsp_geo_lat += 0.001;
 				length_tab = length_tab + 1;
 			}while (lbwsp_geo_lat <= rtwsp_geo_lat);
 		}	
 		
 		if(rtwsp_geo_lon < lbwsp_geo_lon) {
 			do{
-				rtwsp_geo_lon++;
+				rtwsp_geo_lon += 0.001;
 				width_tab = width_tab + 1;
 			}while (rtwsp_geo_lon <= lbwsp_geo_lon);
 			
 		} else {
 			do{
-				lbwsp_geo_lon++;
+				lbwsp_geo_lon += 0.001;
 				width_tab = width_tab + 1;
 			}while (lbwsp_geo_lon <= rtwsp_geo_lon);
 		}
 		
 
-		for(double i = slat; i <= rtwsp_geo_lat; i++) {
-			slatInter++;
+		for(double i = slat; i <= rtwsp_geo_lat; i += 0.001) {
+			slatInter += 0.001;
 		}
 		
-		for(double j = slon; j <= rtwsp_geo_lon; j++) {
-			slonInter++;
+		for(double j = slon; j <= rtwsp_geo_lon; j += 0.001) {
+			slonInter += 0.001;
 		}
 		
 		

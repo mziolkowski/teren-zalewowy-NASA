@@ -11,7 +11,6 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	
 	private Maps maps;
 	private DataSource data;
-	private DataHolder dataHolder;
 	private WorldWindow wwd;
 	private double slat; 						
 	private double slon;	
@@ -20,6 +19,9 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	private int widthTab;
 	private String[][] waterDirection;
 	private ArrayList<Double> coordinateList;
+	private ArrayList<Double> wetListCopy;
+	private ArrayList<Double> listOfPointsCopy;
+	private ArrayList<Double> wetList;
 	private double maxGeoLat;
 	private double minGeoLat;
 	private double maxGeoLon;
@@ -36,18 +38,24 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 		data = new DataSource();
 		data.makeData();
 		this.maps = new Maps(data, this.getWwd());
-		dataHolder = new DataHolder();
 		slat = data.slat;
 		slon = data.slon;
 		lengthTab = data.length_tab;
 		widthTab = data.width_tab;
 		slat_source = data.slat_source;
 		slon_source = data.slon_source;
-		
-		swsp_geo = dataHolder.getSwsp_geo();
+		swsp_geo = data.swsp_geo;
 	}
 	
 	
+	public ArrayList<Double> getWetListCopy() {
+		return wetListCopy;
+	}
+
+	public ArrayList<Double> getListOfPointsCopy() {
+		return listOfPointsCopy;
+	}
+
 	public double getSlat_source() {
 		return slat_source;
 	}
@@ -72,27 +80,34 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 		return waterDirection;
 	}
 
+	public ArrayList<Double> getWetList() {
+		return wetList;
+	}
+
 	public ArrayList<Double> getCoordinateList() {
 		return coordinateList;
 	}
 
-	public void calculation(Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
+	public void calculation(ArrayList<Double> wetListCopy, ArrayList<Double> listOfPointsCopy, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
 		
-		bolleanNetMap3[(int) slat][(int) slon] = true;
-		waterDirection2[(int) slat][(int) slon] = "$";
+		bolleanNetMap3[(int) slat - 1][(int) slon - 1] = true;
+//		waterDirection2[(int) slat][(int) slon] = "$";
 		
 		for(int i = 0; i < list2.size(); i += 2) {
 			
-			if(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] < swsp_geo) {
+			if(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] < swsp_geo) {
 				
-				listOfPoints2.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
+				listOfPoints2.add(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1]);
 				wetList2.add((slat - list2.get(i)));	//wps. X nowego zalanego punktu
 				wetList2.add((slon - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
-				waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
+				listOfPointsCopy.add(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1]);
+				wetListCopy.add((slat - list2.get(i)));	//wps. X nowego zalanego punktu
+				wetListCopy.add((slon - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
+				bolleanNetMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] = true;
+//				waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
 									
 			} else {
-				bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
+				bolleanNetMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] = true;
 			}
 		}
 		System.out.println(listOfPoints2 + " Punkty zalane");
@@ -102,7 +117,7 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 
 }
 
-public void calculation2(Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
+public void calculation2(ArrayList<Double> wetListCopy, ArrayList<Double> listOfPointsCopy, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
 	
 	slat = wetList2.get(0);
 	slon = wetList2.get(1);
@@ -113,14 +128,17 @@ public void calculation2(Double[][] netMap3, ArrayList<Double> list2, ArrayList<
 	
 	for(int i = 0; i < list2.size(); i += 2) {
 		try {
-			if(bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] == false) {
-				if(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] < swsp_geo) {
+			if(bolleanNetMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] == false) {
+				if(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] < swsp_geo) {
 					
-						listOfPoints2.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
+						listOfPoints2.add(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1]);
 						wetList2.add(slat - list2.get(i));
 						wetList2.add(slon - list2.get(i + 1));
-						bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
-						waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
+						listOfPointsCopy.add(netMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1]);
+						wetListCopy.add((slat - list2.get(i)));	//wps. X nowego zalanego punktu
+						wetListCopy.add((slon - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
+						bolleanNetMap3[(int) (slat - list2.get(i)) - 1][(int) (slon - list2.get(i + 1)) - 1] = true;
+//						waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
 				} else {
 					bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 				}
@@ -144,18 +162,23 @@ public void calculation2(Double[][] netMap3, ArrayList<Double> list2, ArrayList<
 public void startCalculation() {
 	Double[][] netMap3 = maps.netMap();
 	ArrayList<Double> list2 = maps.CoordinateList();
+	ArrayList<Double> wetListCopy2 = maps.wetPointsCopy();
+	ArrayList<Double> listOfPointsCopy2 = maps.listOfPointsCopy();
 	ArrayList<Double> wetList2 = maps.wetPoints();
 	Boolean[][] bolleanNetMap3 = maps.booleanNetMap();
 	ArrayList<Double> listOfPoints2 = maps.listOfPoints();
 	String[][] waterDirection2 = maps.createWaterTab();
 	
-	calculation(netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
+	calculation(listOfPointsCopy2, wetListCopy2, netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
 	do {
-	calculation2(netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
+	calculation2(listOfPointsCopy2, wetListCopy2, netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
 	} while (listOfPoints2.isEmpty() == false && wetList2.isEmpty() == false);
 	
 	waterDirection = waterDirection2;
 	coordinateList = list2;
+	wetList = wetList2;
+	wetListCopy = wetListCopy2;
+	listOfPointsCopy = listOfPointsCopy2;
 }
 
 public SectorData maxMinLatLon() {
