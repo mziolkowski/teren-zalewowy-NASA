@@ -21,9 +21,9 @@ public class Elevation {
 		ElevationMap();
 	}
 
-	public double getSwsp_geo() {
-		return swsp_geo;
-	}
+//	public double getSwsp_geo() {
+//		return swsp_geo;
+//	}
 
 	public void ElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
@@ -57,9 +57,9 @@ public class Elevation {
 		}
 
 		Logging.logger().info(sb.toString());
-		swsp_geo = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(dataHolder.getSlat_source()), Angle.fromDegrees(dataHolder.getSlon_source()));
+//		swsp_geo = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(dataHolder.getSlat_source()), Angle.fromDegrees(dataHolder.getSlon_source()));
 //		dataHolder.setSwsp_geo(swsp_geo);
-		System.out.println(swsp_geo);
+//		System.out.println(swsp_geo);
 	}
 
 }

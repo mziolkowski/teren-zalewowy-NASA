@@ -49,8 +49,8 @@ public DataSource makeData() {
 		slon = scan.nextDouble();
 		slon_source = slon;
 				
-//		System.out.println("Podaj wysokosc zród³a wody");
-//		swsp_geo = scan.nextInt();
+		System.out.println("Podaj wysokosc zród³a wody");
+		swsp_geo = scan.nextInt();
 		
 		
 		//Okreslenie wymiaru tablicy
