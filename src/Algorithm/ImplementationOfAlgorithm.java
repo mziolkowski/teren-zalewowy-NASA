@@ -27,6 +27,7 @@ public class ImplementationOfAlgorithm {
 		
 		ArrayList<Double> coordinateList = algorithm.getCoordinateList();
 		ArrayList<Double> wetList = algorithm.getWetList();
+		ArrayList<Double> wetListCopy = algorithm.getWetListCopy();
 		String[][] waterDirection2 = algorithm.getWaterDirections();
 			
 		return dataHolder;

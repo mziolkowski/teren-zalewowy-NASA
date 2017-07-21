@@ -89,7 +89,6 @@ public class Maps {
 	protected Boolean[][] booleanNetMap() {
 		Boolean[][] booleanNetMap = new Boolean[data.length_tab - 1][data.width_tab - 1];
 
-		// Uzupelnienie tablicy losowymi liczbami
 		for (int i = 0; i <= booleanNetMap.length - 1; i++) {
 			for (int j = 0; j <= booleanNetMap.length - 1; j++) {
 				booleanNetMap[i][j] = false;
@@ -101,7 +100,6 @@ public class Maps {
 	public String[][] createWaterTab() {
 		String[][] waterDirection = new String[data.length_tab - 1][data.width_tab - 1];
 
-		// Uzupelnienie tablicy losowymi liczbami
 		for (int i = 0; i <= waterDirection.length - 1; i++) {
 			for (int j = 0; j <= waterDirection.length - 1; j++) {
 				waterDirection[i][j] = "-";

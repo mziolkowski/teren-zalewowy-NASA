@@ -82,11 +82,11 @@ public DataSource makeData() {
 		
 
 		for(double i = slat; i <= rtwsp_geo_lat; i += 0.001) {
-			slatInter += 0.001;
+			slatInter++;
 		}
 		
 		for(double j = slon; j <= rtwsp_geo_lon; j += 0.001) {
-			slonInter += 0.001;
+			slonInter++;
 		}
 		
 		
