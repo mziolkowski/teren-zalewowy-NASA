@@ -38,8 +38,8 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 		data = new DataSource();
 		data.makeData();
 		this.maps = new Maps(data, this.getWwd());
-		slat_source = data.slat;
-		slon_source = data.slon;
+		slat = data.slat;
+		slon = data.slon;
 		lengthTab = data.length_tab;
 		widthTab = data.width_tab;
 		slat_source = data.slat_source;
@@ -73,7 +73,7 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	}
 
 	public PositionHolder getStartPosition() {
-		return new PositionHolder(slat_source, slon_source);
+		return new PositionHolder(slat, slon);
 	}
 
 	public String[][] getWaterDirections() {
@@ -90,24 +90,24 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 
 	public void calculation(ArrayList<Double> wetListCopy, ArrayList<Double> listOfPointsCopy, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
 		
-		bolleanNetMap3[(int) slat_source][(int) slon_source] = true;
+		bolleanNetMap3[(int) slat][(int) slon] = true;
 //		waterDirection2[(int) slat][(int) slon] = "$";
 		
 		for(int i = 0; i < list2.size(); i += 2) {
 			
-			if(netMap3[(int) (slat_source - list2.get(i)) ][(int) (slon_source - list2.get(i + 1)) ] < swsp_geo) {
+			if(netMap3[(int) (slat - list2.get(i)) ][(int) (slon - list2.get(i + 1)) ] < swsp_geo) {
 				
-				listOfPoints2.add(netMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))]);
+				listOfPoints2.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
 				wetList2.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
 				wetList2.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				listOfPointsCopy.add(netMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))]);
+				listOfPointsCopy.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
 				wetListCopy.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
 				wetListCopy.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] = true;
+				bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 //				waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
 									
 			} else {
-				bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] = true;
+				bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 			}
 		}
 		System.out.println(listOfPoints2 + " Punkty zalane");
@@ -119,8 +119,8 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 
 public void calculation2(ArrayList<Double> wetListCopy, ArrayList<Double> listOfPointsCopy, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetList2, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPoints2, String[][] waterDirection2) {
 	
-	slat_source = wetList2.get(0);
-	slon_source = wetList2.get(1);
+	slat = wetList2.get(0);
+	slon = wetList2.get(1);
 	listOfPoints2.remove(0);
 	wetList2.remove(1);
 	wetList2.remove(0);
@@ -128,23 +128,23 @@ public void calculation2(ArrayList<Double> wetListCopy, ArrayList<Double> listOf
 	
 	for(int i = 0; i < list2.size(); i += 2) {
 		try {
-			if(bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] == false) {
-				if(netMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] < swsp_geo) {
+			if(bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] == false) {
+				if(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] < swsp_geo) {
 					
-						listOfPoints2.add(netMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))]);
+						listOfPoints2.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
 						wetList2.add(slat_source - list2.get(i));
 						wetList2.add(slon_source - list2.get(i + 1));
-						listOfPointsCopy.add(netMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))]);
+						listOfPointsCopy.add(netMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))]);
 						wetListCopy.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
 						wetListCopy.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-						bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] = true;
+						bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 //						waterDirection2[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = "#";
 				} else {
-					bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] = true;
+					bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 				}
 											
 			} else {
-				bolleanNetMap3[(int) (slat_source - list2.get(i))][(int) (slon_source - list2.get(i + 1))] = true;
+				bolleanNetMap3[(int) (slat - list2.get(i))][(int) (slon - list2.get(i + 1))] = true;
 			}
 		}
 			
@@ -177,8 +177,8 @@ public void startCalculation() {
 	waterDirection = waterDirection2;
 	coordinateList = list2;
 	wetList = wetList2;
-	wetListCopy = wetListCopy2;
 	listOfPointsCopy = listOfPointsCopy2;
+	wetListCopy = wetListCopy2;
 }
 
 public SectorData maxMinLatLon() {

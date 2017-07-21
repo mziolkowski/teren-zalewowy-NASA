@@ -61,33 +61,34 @@ public class Imagery {
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
 				
 				
-				BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+				BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {
 					
 					public void run() {
+						Color c = new Color(0, 200, 200, 0);
 						
 //						String[][] waterDirection = dataHolder.getWaterDirections();
-						ArrayList<Double> wetListCopy = dataHolder.getWetListCopy();
+						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
 						ArrayList<Double> list2 = dataHolder.getCoordinateList();
 					
 						// Add the SurfaceImage to a layer.
 						SurfaceImageLayer layer = new SurfaceImageLayer();
 						layer.setName("Imported Surface Image");
 						layer.setPickEnabled(false);
-						image.setRGB((int) dataHolder.getStartPosition().getLat(),(int) dataHolder.getStartPosition().getLon(),(Color.red.getRGB()));
+						image.setRGB((int) dataHolder.getSlat_source(),(int) dataHolder.getSlon_source(),(c.getRGB()));
 						layer.addRenderable(surfaceImage);
 						
-						for (int i = 0; i <= wetListCopy.size(); i++) {
-//							if (wetListCopy.get(i) < dataHolder.getSwsp_geo()) {
-//									[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
-								image.setRGB((int)( dataHolder.getStartPosition().getLat() - list2.get(i)),(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1)),(Color.blue.getRGB()));
-								layer.addRenderable(surfaceImage);
-//							} else {
+//						for (int i = 0; i <= listOfPoints.size(); i++) {
+//							if (listOfPoints.get(i) < dataHolder.getSwsp_geo()) {
+////									[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
+//								image.setRGB((int)( dataHolder.getSlat_source() - list2.get(i)),(int) (dataHolder.getSlon_source() - list2.get(i + 1)),(Color.blue.getRGB()));
 //								layer.addRenderable(surfaceImage);
+////							} else {
+////								layer.addRenderable(surfaceImage);
 //							}
-						}
+//						}
 
 						// Add the layer to the model and update the
 						// application's layer panel.

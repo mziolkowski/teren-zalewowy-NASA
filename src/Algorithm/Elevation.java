@@ -23,13 +23,13 @@ public class Elevation {
 
 	public void ElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
-		Double[][] sourceWaterLatLon = new Double[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
+//		Double[][] sourceWaterLatLon = new Double[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
 
-		for (int i = 0; i < dataHolder.getLength_tab(); i++) {
-			for (int j = 0; j < dataHolder.getWidth_tab(); j++) {
+		for (double i = 0, a = 0; i < dataHolder.getLength_tab(); i++, a += 0.001) {
+			for (double j = 0, b = 0; j < dataHolder.getWidth_tab(); j++, b += 0.001) {
 
-				latlons.add(LatLon.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLat() + i,
-						dataHolder.getMaxMinLatLon().getMin().getLon() + j));
+				latlons.add(LatLon.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLat() + a,
+						dataHolder.getMaxMinLatLon().getMin().getLon() + b));
 			}
 		}
 
@@ -50,6 +50,8 @@ public class Elevation {
 		}
 
 		Logging.logger().info(sb.toString());
+		
+		
 	}
 
 }

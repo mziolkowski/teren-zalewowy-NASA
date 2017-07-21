@@ -48,13 +48,13 @@ public class Maps {
 		return list1;
 	}
 
-	// Tablica przechowywujaca wsp. punktow zalanych
+	// Tablica przechowywujaca zalane punkty (wartosc punktu)wsp. punktow zalanych
 	protected ArrayList<Double> wetPoints() {
 		ArrayList<Double> wetList = new ArrayList<Double>(16);
 		return wetList;
 	}
 
-	// Tablica przechowywujaca zalane punkty (wartosc punktu)
+	// Tablica przechowywujaca wsp. punktow zalanych
 	protected ArrayList<Double> listOfPoints() {
 		ArrayList<Double> listOfPoints = new ArrayList<Double>(16);
 		return listOfPoints;
@@ -78,8 +78,8 @@ public class Maps {
 
 		for (double i = 0, a = 0; i <= netMap.length - 1; i++, a += 0.001) {
 			for (double j = 0, b = 0; j <= netMap.length - 1; j++, b += 0.001) {
-				netMap[(int) i][(int) j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.slat_source + a),
-						Angle.fromDegrees(data.slon_source + b));
+				netMap[(int) i][(int) j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.lbwsp_geo_lat_source + a),
+						Angle.fromDegrees(data.lbwsp_geo_lon_source + b));
 			}
 		}
 
