@@ -23,7 +23,6 @@ public class Elevation {
 
 	public double[] getElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
-//		Double[][] sourceWaterLatLon = new Double[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
 
 		for (double i = 0, a = 0; i < dataHolder.getLength_tab(); i++, a += 0.001) {
 			for (double j = 0, b = 0; j < dataHolder.getWidth_tab(); j++, b += 0.001) {
@@ -49,7 +48,7 @@ public class Elevation {
 			sb.append("\n").append(e);
 		}
 
-		Logging.logger().info(sb.toString());
+//		Logging.logger().info(sb.toString());
 		
 		return elevations;
 	}

@@ -26,18 +26,18 @@ public DataSource makeData() {
 	
 	Scanner scan = new Scanner(System.in);
 		//Wskazanie lewego-dolnego punktu
-		System.out.println("Podaj szerokosc geograficzna lewego-gornego punktu");
+		System.out.println("Podaj szerokosc geograficzna lewego-dolnego punktu");
 		lbwsp_geo_lat = scan.nextDouble();
 		lbwsp_geo_lat_source = lbwsp_geo_lat;
-		System.out.println("Podaj dlugosc geograficzna lewego-gornego punkty");
+		System.out.println("Podaj dlugosc geograficzna lewego-dolnego punkty");
 		lbwsp_geo_lon = scan.nextDouble();
 		lbwsp_geo_lon_source = lbwsp_geo_lon;
 		
 		//Wskazanie prawego-gornego punktu
-		System.out.println("Podaj szerokosc geograficzna prawego-dolnego punktu");
+		System.out.println("Podaj szerokosc geograficzna prawego-gÃ³rnego punktu");
 		rtwsp_geo_lat = scan.nextDouble();
 		rtwsp_geo_lat_source = rtwsp_geo_lat;
-		System.out.println("Podaj dlugosc geograficzna prawego-dolnego punkty");
+		System.out.println("Podaj dlugosc geograficzna prawego-gÃ³rnego punkty");
 		rtwsp_geo_lon = scan.nextDouble();
 		rtwsp_geo_lon_source = rtwsp_geo_lon;
 				
@@ -49,7 +49,7 @@ public DataSource makeData() {
 		slon = scan.nextDouble();
 		slon_source = slon;
 				
-		System.out.println("Podaj wysokosc zród³a wody");
+		System.out.println("Podaj wysokosc zrï¿½dï¿½a wody");
 		swsp_geo = scan.nextInt();
 		
 		

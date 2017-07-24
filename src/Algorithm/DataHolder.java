@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class DataHolder {
 	private SectorData maxMinLatLon;
 	private PositionHolder startPosition;
-	private String[][] waterDirection;
+	private Boolean[][] waterDirection;
 	private ArrayList<Double> wetListInteger;
 	private ArrayList<Double> wetList;
 	private ArrayList<Double> listOfPoints;
@@ -19,9 +19,27 @@ public class DataHolder {
 	private double slonInter;
 	private double slat_source;
 	private double slon_source;
+	private double slat;
+	private double slon;
 	private double swsp_geo;
 		
 	
+	public double getSlat() {
+		return slat;
+	}
+
+	public void setSlat(double slat) {
+		this.slat = slat;
+	}
+
+	public double getSlon() {
+		return slon;
+	}
+
+	public void setSlon(double slon) {
+		this.slon = slon;
+	}
+
 	public Double[][] getNetMap() {
 		return netMap;
 	}
@@ -134,7 +152,7 @@ public class DataHolder {
 		return startPosition;
 	}
 
-	public String[][] getWaterDirections() {
+	public Boolean[][] getWaterDirections() {
 		return waterDirection;
 	}
 
@@ -146,7 +164,7 @@ public class DataHolder {
 		this.startPosition = startPosition;
 	}
 
-	public void setWaterDirection(String[][] waterDirection) {
+	public void setWaterDirection(Boolean[][] waterDirection) {
 		this.waterDirection = waterDirection;
 	}
 	

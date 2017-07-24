@@ -29,7 +29,7 @@ public class ImplementationOfAlgorithm {
 		ArrayList<Double> coordinateList = algorithm.getCoordinateList();
 		ArrayList<Double> wetList = algorithm.getWetList();
 		ArrayList<Double> wetListCopy = algorithm.getWetListCopy();
-		String[][] waterDirection2 = algorithm.getWaterDirections();
+		Boolean[][] waterDirection2 = algorithm.getWaterDirections();
 		ArrayList<Integer> coordinateListInteger = algorithm.getCoordinateListInteger();
 		Double[][] netMap = algorithm.getNetMap();
 			

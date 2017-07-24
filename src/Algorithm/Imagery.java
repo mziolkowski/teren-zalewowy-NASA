@@ -33,7 +33,7 @@ public class Imagery {
 	
 	public static class AppFrame extends ApplicationTemplate.AppFrame {
 		
-		protected Elevation elevation;
+//		protected Elevation elevation;
 		protected Maps maps;
 		private DataSource data;
 		
@@ -86,7 +86,7 @@ public class Imagery {
 						ArrayList<Double> wetList = dataHolder.getWetListCopy();
 						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
 						Double[][] netMap = dataHolder.getNetMap();
-						String[][] waterDirection = dataHolder.getWaterDirections();
+						Boolean[][] waterDirection = dataHolder.getWaterDirections();
 
 					
 //						image.setRGB((int) dataHolder.getSlat_source(),(int) dataHolder.getSlon_source(),(Color.blue.getRGB()));
@@ -105,10 +105,11 @@ public class Imagery {
 							}
 						}
 						layer.addRenderable(surfaceImage);*/
-						image.setRGB((int) dataHolder.getSlat_source(), (int) dataHolder.getSlon_source(),(Color.red.getRGB()));
+						
+//						image.setRGB((int) dataHolder.getSlat(), (int) dataHolder.getSlon(),(Color.red.getRGB()));
 						for(int i = 0; i < waterDirection.length; i ++) {
 							for(int j = 0; j< waterDirection[i].length; j ++) {
-								if(waterDirection[j][i] == "#" ) {
+								if(waterDirection[j][i] == true ) {
 									image.setRGB(i, j,(blueColor.getRGB()));
 //									layer.addRenderable(surfaceImage);
 								} else {

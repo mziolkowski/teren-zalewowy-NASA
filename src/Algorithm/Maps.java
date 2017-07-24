@@ -108,9 +108,9 @@ public class Maps {
 		Double[][] netMap = new Double[data.length_tab - 1][data.width_tab - 1];
 
 		for (double i = 0, a = 0; i <= netMap.length - 1; i++, a += 0.001) {
-			for (double j = 0, b = 0; j <= netMap.length - 1; j++, b += 0.001) {
-				netMap[(int) i][(int) j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.lbwsp_geo_lat_source + a),
-						Angle.fromDegrees(data.lbwsp_geo_lon_source + b));
+			for (double j = 0, b = 0; j <= netMap[(int) i].length - 1; j++, b += 0.001) {
+				netMap[(int) i][(int) j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.lbwsp_geo_lat_source + b),
+						Angle.fromDegrees(data.lbwsp_geo_lon_source + a));
 			}
 		}
 
@@ -128,12 +128,12 @@ public class Maps {
 		return booleanNetMap;
 	}
 
-	public String[][] createWaterTab() {
-		String[][] waterDirection = new String[data.length_tab - 1][data.width_tab - 1];
+	public Boolean[][] createWaterTab() {
+		Boolean[][] waterDirection = new Boolean[data.length_tab - 1][data.width_tab - 1];
 
 		for (int i = 0; i <= waterDirection.length - 1; i++) {
 			for (int j = 0; j <= waterDirection.length - 1; j++) {
-				waterDirection[i][j] = "-";
+				waterDirection[i][j] = false;
 			}
 		}
 		return waterDirection;
