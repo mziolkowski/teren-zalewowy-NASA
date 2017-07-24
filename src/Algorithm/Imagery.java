@@ -2,6 +2,7 @@ package Algorithm;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -79,8 +80,8 @@ public class Imagery {
 				SwingUtilities.invokeLater(new Runnable() {
 					
 					public void run() {
-						Color blueColor = new Color(0, 200, 200, 0);
-						Color transparentColor = new Color(0, 0, 0, 0);
+						Color blueColor = new Color(0, 100, 250, 140);
+						Color transparentColor = new Color(0, 0, 0, 1);
 						
 						ArrayList<Double> wetList = dataHolder.getWetListCopy();
 						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
@@ -104,15 +105,14 @@ public class Imagery {
 							}
 						}
 						layer.addRenderable(surfaceImage);*/
-						
-//						waterDirection[(int) a][(int) b] == "$"
+						image.setRGB((int) dataHolder.getSlat_source(), (int) dataHolder.getSlon_source(),(Color.red.getRGB()));
 						for(int i = 0; i < waterDirection.length; i ++) {
 							for(int j = 0; j< waterDirection[i].length; j ++) {
-								if(waterDirection[i][j] == "#" ) {
-									image.setRGB(i, j,(Color.blue.getRGB()));
+								if(waterDirection[j][i] == "#" ) {
+									image.setRGB(i, j,(blueColor.getRGB()));
 //									layer.addRenderable(surfaceImage);
 								} else {
-									image.setRGB(i, j,(Color.red.getRGB()));
+									image.setRGB(i,j ,(transparentColor.getRGB()));
 //									layer.addRenderable(surfaceImage);
 								}
 							}
