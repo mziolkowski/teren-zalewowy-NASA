@@ -189,8 +189,8 @@ public class RetrieveElevations extends ApplicationTemplate
             {
                 sb.append("\n").append(e);
             }
-            sb.append("\nresolutionAchieved = ").append(resolutionAchieved);
-            sb.append(", requested resolution = ").append(targetResolution);
+//            sb.append("\nresolutionAchieved = ").append(resolutionAchieved);
+//            sb.append(", requested resolution = ").append(targetResolution);
 
             Logging.logger().info(sb.toString());
         }

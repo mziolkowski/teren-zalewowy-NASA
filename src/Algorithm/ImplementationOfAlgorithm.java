@@ -15,7 +15,7 @@ public class ImplementationOfAlgorithm {
 		
 		dataHolder.setStartPosition(algorithm.getStartPosition());
 		dataHolder.setWaterDirection(algorithm.getWaterDirections());
-		dataHolder.setMaxMinLatLon(algorithm.maxMinLatLon());
+		dataHolder.setMaxMinLatLon(algorithm.getMaxMinLatLon());
 		dataHolder.setWetList(algorithm.getWetList());
 		dataHolder.setListOfPointsCopy(algorithm.getListOfPointsCopy());
 		dataHolder.setWetListCopy(algorithm.getWetListCopy());
@@ -24,11 +24,14 @@ public class ImplementationOfAlgorithm {
 		dataHolder.setWidth_tab(algorithm.getWidthTab());
 		dataHolder.setSlat_source(algorithm.getSlat_source());
 		dataHolder.setSlon_source(algorithm.getSlon_source());
+		dataHolder.setNetMap(algorithm.getNetMap());
 		
 		ArrayList<Double> coordinateList = algorithm.getCoordinateList();
 		ArrayList<Double> wetList = algorithm.getWetList();
 		ArrayList<Double> wetListCopy = algorithm.getWetListCopy();
 		String[][] waterDirection2 = algorithm.getWaterDirections();
+		ArrayList<Integer> coordinateListInteger = algorithm.getCoordinateListInteger();
+		Double[][] netMap = algorithm.getNetMap();
 			
 		return dataHolder;
 

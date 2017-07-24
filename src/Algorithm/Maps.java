@@ -11,6 +11,7 @@ public class Maps {
 
 	DataSource data;
 	WorldWindow wwd;
+	SectorData sectorData;
 
 	public Maps(DataSource data, WorldWindow wwd) {
 		super();
@@ -46,6 +47,36 @@ public class Maps {
 		list1.add(0.001);
 
 		return list1;
+	}
+	
+	public static ArrayList<Integer> CoordinateListInteger() {
+		ArrayList<Integer> coordinateListInteger = new ArrayList<Integer>(16);
+
+		coordinateListInteger.add(-1); // wiersz
+		coordinateListInteger.add(-1); // kolumna
+
+		coordinateListInteger.add(-1);
+		coordinateListInteger.add(0);
+
+		coordinateListInteger.add(-1);
+		coordinateListInteger.add(1);
+		///////////////////////////////
+		coordinateListInteger.add(0);
+		coordinateListInteger.add(-1);
+
+		coordinateListInteger.add(0);
+		coordinateListInteger.add(1);
+		///////////////////////////////
+		coordinateListInteger.add(1);
+		coordinateListInteger.add(-1);
+
+		coordinateListInteger.add(1);
+		coordinateListInteger.add(0);
+
+		coordinateListInteger.add(1);
+		coordinateListInteger.add(1);
+
+		return coordinateListInteger;
 	}
 
 	// Tablica przechowywujaca zalane punkty (wartosc punktu)wsp. punktow zalanych

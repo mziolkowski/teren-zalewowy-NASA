@@ -18,10 +18,10 @@ public class Elevation {
 		super();
 		this.dataHolder = dataHolder;
 		this.wwd = wwd;
-		ElevationMap();
+		getElevationMap();
 	}
 
-	public void ElevationMap() {
+	public double[] getElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 //		Double[][] sourceWaterLatLon = new Double[dataHolder.getWidth_tab() - 1][dataHolder.getLength_tab() - 1];
 
@@ -40,7 +40,7 @@ public class Elevation {
 		double[] elevations = new double[latlons.size()];
 
 		double targetResolution = Angle.fromDegrees(1d).radians / 3600;
-
+		
 		double resolutionAchieved = this.wwd.getModel().getGlobe().getElevationModel().getElevations(sector, latlons,
 				targetResolution, elevations);
 
@@ -51,7 +51,7 @@ public class Elevation {
 
 		Logging.logger().info(sb.toString());
 		
-		
+		return elevations;
 	}
 
 }

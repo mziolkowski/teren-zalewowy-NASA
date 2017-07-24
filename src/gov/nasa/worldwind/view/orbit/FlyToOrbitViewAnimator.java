@@ -121,6 +121,7 @@ public class FlyToOrbitViewAnimator extends CompoundAnimator
             if (this.altitudeMode == WorldWind.CLAMP_TO_GROUND)
             {
                 overrideEndElevation = true;
+                if(globe!=null)
                 endElevation = this.globe.getElevation(getEnd().getLatitude(), getEnd().getLongitude());
             }
             else if (this.altitudeMode == WorldWind.RELATIVE_TO_GROUND)

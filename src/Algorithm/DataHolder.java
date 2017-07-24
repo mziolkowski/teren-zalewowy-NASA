@@ -6,11 +6,13 @@ public class DataHolder {
 	private SectorData maxMinLatLon;
 	private PositionHolder startPosition;
 	private String[][] waterDirection;
+	private ArrayList<Double> wetListInteger;
 	private ArrayList<Double> wetList;
-	private ArrayList<Double> wetListCopy;
 	private ArrayList<Double> listOfPoints;
 	private ArrayList<Double> listOfPointsCopy;
 	private ArrayList<Double> coordinateList;
+	private ArrayList<Integer> coordinateListInteger;
+	private Double[][] netMap;
 	private int length_tab;
 	private int width_tab;
 	private double slatInter;
@@ -20,12 +22,28 @@ public class DataHolder {
 	private double swsp_geo;
 		
 	
+	public Double[][] getNetMap() {
+		return netMap;
+	}
+
+	public void setNetMap(Double[][] netMap) {
+		this.netMap = netMap;
+	}
+
+	public ArrayList<Integer> getCoordinateListInteger() {
+		return coordinateListInteger;
+	}
+
+	public void setCoordinateListInteger(ArrayList<Integer> coordinateListInteger) {
+		this.coordinateListInteger = coordinateListInteger;
+	}
+
 	public ArrayList<Double> getWetListCopy() {
-		return wetListCopy;
+		return wetList;
 	}
 
 	public void setWetListCopy(ArrayList<Double> wetListCopy) {
-		this.wetListCopy = wetListCopy;
+		this.wetList = wetListCopy;
 	}
 
 	public ArrayList<Double> getListOfPointsCopy() {
@@ -37,11 +55,11 @@ public class DataHolder {
 	}
 
 	public ArrayList<Double> getWetList() {
-		return wetList;
+		return wetListInteger;
 	}
 
 	public void setWetList(ArrayList<Double> wetList) {
-		this.wetList = wetList;
+		this.wetListInteger = wetList;
 	}
 
 	public double getSwsp_geo() {

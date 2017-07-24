@@ -25,6 +25,7 @@ import javax.swing.*;
  *
  * @version $Id: SimplestPossibleExample.java 1171 2013-02-11 21:45:02Z dcollins $
  */
+
 public class SimplestPossibleExample extends JFrame
 {
     public SimplestPossibleExample()
