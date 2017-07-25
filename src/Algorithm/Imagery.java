@@ -87,24 +87,7 @@ public class Imagery {
 						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
 						Double[][] netMap = dataHolder.getNetMap();
 						Boolean[][] waterDirection = dataHolder.getWaterDirections();
-
 					
-//						image.setRGB((int) dataHolder.getSlat_source(),(int) dataHolder.getSlon_source(),(Color.blue.getRGB()));
-//						layer.addRenderable(surfaceImage);
-						
-						
-/*						for(double i = dataHolder.getMaxMinLatLon().getMin().getLat(), a = 0; i <= dataHolder.getLength_tab(); i += 0.001, a++) {
-							for(double j = dataHolder.getMaxMinLatLon().getMin().getLon(), b = 0; j <= dataHolder.getWidth_tab(); j += 0.001, b++) {
-								if(waterDirection[(int) a][(int) b] == "#" || waterDirection[(int) a][(int) b] == "$") {
-									image.setRGB((int) a, (int) b,(Color.blue.getRGB()));
-//									layer.addRenderable(surfaceImage);
-								} else {
-									image.setRGB((int) a, (int) b,(Color.red.getRGB()));
-//									layer.addRenderable(surfaceImage);
-								}
-							}
-						}
-						layer.addRenderable(surfaceImage);*/
 						
 //						image.setRGB((int) dataHolder.getSlat(), (int) dataHolder.getSlon(),(Color.red.getRGB()));
 						for(int i = 0; i < waterDirection.length; i ++) {
@@ -119,46 +102,7 @@ public class Imagery {
 							}
 						}
 						layer.addRenderable(surfaceImage);
-						
-//						for(double i = dataHolder.getMaxMinLatLon().getMin().getLat(), a = 0, k = 0; i <= dataHolder.getMaxMinLatLon().getMax().getLat(); i += 0.001, a++) {
-//							for(double j = dataHolder.getMaxMinLatLon().getMin().getLon(), b = 0; j <= dataHolder.getMaxMinLatLon().getMax().getLon(); j += 0.001, b++) {
-//								if(wetList.get((int) k) == netMap[(int) a][(int) b]) {
-//									image.setRGB((int) dataHolder.getSlat_source(),(int) dataHolder.getSlon_source(),(Color.blue.getRGB()));
-//									layer.addRenderable(surfaceImage);
-//									k++;
-//									a = 0;
-//									b = 0;
-//								} else {
-//									image.setRGB((int) dataHolder.getSlat_source() + (int) i,(int) dataHolder.getSlon_source() + (int) j,(Color.red.getRGB()));
-//									layer.addRenderable(surfaceImage);
-//								}
-//							}
-//						}
-						
-//						for(int i = 0, k = 0; i <= netMap.length; i++) {
-//							for(int j = 0; j <= netMap.length; j++) {
-//								if(wetList.get(k) == netMap[i][j]) {
-//									image.setRGB((int) dataHolder.getSlat_source() + i,(int) dataHolder.getSlon_source() + j,(Color.blue.getRGB()));
-//									layer.addRenderable(surfaceImage);
-//									k++;
-//								} else {
-////									image.setRGB((int) dataHolder.getSlat_source() + i,(int) dataHolder.getSlon_source() + j,(Color.red.getRGB()));
-////									layer.addRenderable(surfaceImage);
-//									k++;
-//								}
-//							}
-//						}
-						
-//						for (int i = 0; i <= listOfPoints.size(); i++) {
-//							if (listOfPoints.get(i) < dataHolder.getSwsp_geo()) {
-////									[(int) (dataHolder.getStartPosition().getLat() - list2.get(i))][(int) (dataHolder.getStartPosition().getLon() - list2.get(i + 1))] == "#") {
-//								image.setRGB((int)( dataHolder.getSlat_source() - list2.get(i)),(int) (dataHolder.getSlon_source() - list2.get(i + 1)),(Color.blue.getRGB()));
-//								layer.addRenderable(surfaceImage);
-////							} else {
-////								layer.addRenderable(surfaceImage);
-//							}
-//						}
-
+				
 						// Add the layer to the model and update the
 						// application's layer panel.
 						insertBeforeCompass(AppFrame.this.getWwd(), layer);

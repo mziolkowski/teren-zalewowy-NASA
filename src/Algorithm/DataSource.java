@@ -20,6 +20,10 @@ public class DataSource {
 	double rtwsp_geo_lon_source;
 	double slat_source;
 	double slon_source;
+	double minGeoLat;
+	double maxGeoLat;
+	double minGeoLon;
+	double maxGeoLon;
 
 
 public DataSource makeData() {
@@ -99,6 +103,22 @@ public DataSource makeData() {
 		
 		slat = rtwsp_geo_lat - slatInter;
 		slon = rtwsp_geo_lon - slonInter;
+		
+		if (rtwsp_geo_lat_source > lbwsp_geo_lat_source) {
+			maxGeoLat = rtwsp_geo_lat_source;
+			minGeoLat = lbwsp_geo_lat_source;
+		} else {
+			maxGeoLat = lbwsp_geo_lat_source;
+			minGeoLat = rtwsp_geo_lat_source;
+		}
+
+		if (rtwsp_geo_lon_source > lbwsp_geo_lon_source) {
+			maxGeoLon = rtwsp_geo_lon_source;
+			minGeoLon = lbwsp_geo_lon_source;
+		} else {
+			maxGeoLon = lbwsp_geo_lon_source;
+			minGeoLon = rtwsp_geo_lon_source;
+		}
 		
 		return this;
 	
