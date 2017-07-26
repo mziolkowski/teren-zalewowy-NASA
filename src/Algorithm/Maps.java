@@ -23,37 +23,37 @@ public class Maps  extends ApplicationTemplate.AppFrame{
 		this.wwd = wwd;
 	}
 
-	public static ArrayList<Double> CoordinateList() {
-		ArrayList<Double> list1 = new ArrayList<Double>(16);
+	public static ArrayList<Double> setCoordinateListDouble() {
+		ArrayList<Double> coordinateListDouble = new ArrayList<Double>(16);
 
-		list1.add(-0.001); // wiersz
-		list1.add(-0.001); // kolumna
+		coordinateListDouble.add(-0.001); // wiersz
+		coordinateListDouble.add(-0.001); // kolumna
 
-		list1.add(-0.001);
-		list1.add(0.000);
+		coordinateListDouble.add(-0.001);
+		coordinateListDouble.add(0.000);
 
-		list1.add(-0.001);
-		list1.add(0.001);
+		coordinateListDouble.add(-0.001);
+		coordinateListDouble.add(0.001);
 		///////////////////////////////
-		list1.add(0.000);
-		list1.add(-0.001);
+		coordinateListDouble.add(0.000);
+		coordinateListDouble.add(-0.001);
 
-		list1.add(0.000);
-		list1.add(0.001);
+		coordinateListDouble.add(0.000);
+		coordinateListDouble.add(0.001);
 		///////////////////////////////
-		list1.add(0.001);
-		list1.add(-0.001);
+		coordinateListDouble.add(0.001);
+		coordinateListDouble.add(-0.001);
 
-		list1.add(0.001);
-		list1.add(0.000);
+		coordinateListDouble.add(0.001);
+		coordinateListDouble.add(0.000);
 
-		list1.add(0.001);
-		list1.add(0.001);
+		coordinateListDouble.add(0.001);
+		coordinateListDouble.add(0.001);
 
-		return list1;
+		return coordinateListDouble;
 	}
 	
-	public static ArrayList<Integer> CoordinateListInteger() {
+	public static ArrayList<Integer> setCoordinateListInteger() {
 		ArrayList<Integer> coordinateListInteger = new ArrayList<Integer>(16);
 
 		coordinateListInteger.add(-1); // wiersz
@@ -83,46 +83,31 @@ public class Maps  extends ApplicationTemplate.AppFrame{
 		return coordinateListInteger;
 	}
 
-	// Tablica przechowywujaca zalane punkty (wartosc punktu)wsp. punktow zalanych
-	protected ArrayList<Double> wetPoints() {
-		ArrayList<Double> wetList = new ArrayList<Double>(16);
-		return wetList;
+	// Tablica przechowywujaca zalane punkty (wartosc punktu) wsp. punktow zalanych
+	protected ArrayList<Double> listOfFloodValue() {
+		ArrayList<Double> listOfFloodValue = new ArrayList<Double>(16);
+		return listOfFloodValue;
 	}
 
 	// Tablica przechowywujaca wsp. punktow zalanych
-	protected ArrayList<Double> listOfPoints() {
-		ArrayList<Double> listOfPoints = new ArrayList<Double>(16);
-		return listOfPoints;
-	}
-	
-	
-	protected ArrayList<Double> wetPointsCopy() {
-		ArrayList<Double> wetListCopy = new ArrayList<Double>(16);
-		return wetListCopy;
+	protected ArrayList<Double> listOfFloodCoordinate() {
+		ArrayList<Double> listOfFloodCoordinate = new ArrayList<Double>(16);
+		return listOfFloodCoordinate;
 	}
 
-
-	protected ArrayList<Double> listOfPointsCopy() {
-		ArrayList<Double> listOfPointsCopy = new ArrayList<Double>(16);
-		return listOfPointsCopy;
-	}
-
-	public Double[][] netMap() {
+	public Double[][] elevationsMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 		Globe globe = this.getWwd().getModel().getGlobe();
-        Double[][] netMap = new Double[data.length_tab - 1][data.width_tab];
+        Double[][] elevationsMap = new Double[data.getLengthTab() - 1][data.getWidthTab()];
         
-        for (double i = 0, a = 0; i < data.length_tab; i++, a += 0.001) {
-			for (double j = 0, b = 0; j < data.width_tab; j++, b += 0.001) {
+        for (double i = 0, a = 0; i < data.getLengthTab(); i++, a += 0.001) {
+			for (double j = 0, b = 0; j < data.getWidthTab(); j++, b += 0.001) {
 
-				latlons.add(LatLon.fromDegrees(data.minGeoLat + a,
-						data.minGeoLon + b));
+				latlons.add(LatLon.fromDegrees(data.getMinGeoLat() + a,
+						data.getMinGeoLon() + b));
 			}
 		}
         
-//        Sector sector = Sector.fromDegrees(data.minGeoLat,
-//				data.maxGeoLat, data.minGeoLon,
-//				data.maxGeoLon);
         Sector sector = Sector.boundingSector(latlons);
         double[] elevations = new double[latlons.size()];
         // Iterate until the best resolution is achieved. Use the elevation model to determine the best elevation.
@@ -133,15 +118,15 @@ public class Maps  extends ApplicationTemplate.AppFrame{
         double b = 0;
         
         
-		for (int i = 0; i <= netMap.length - 1; i++, a += 0.001) {
+		for (int i = 0; i <= elevationsMap.length - 1; i++, a += 0.001) {
 			b = 0;
-			for (int j = 0; j <= netMap[i].length - 1; j++, b += 0.001) {
+			for (int j = 0; j <= elevationsMap[i].length - 1; j++, b += 0.001) {
 				while (actualResolution > targetResolution) {
 					actualResolution = globe.getElevations(sector, latlons, targetResolution, elevations);
 					// Uncomment the two lines below if you want to watch the
 					// resolution converge
 //					System.out.printf("Target resolution = %s, Actual resolution = %s\n",
-//							Double.toString(targetResolution), Double.toString(actualResolution));
+//					Double.toString(targetResolution), Double.toString(actualResolution));
 					try {
 						Thread.sleep(2); // give the system a chance to
 											// retrieve data from the disk cache
@@ -150,34 +135,34 @@ public class Maps  extends ApplicationTemplate.AppFrame{
 						e.printStackTrace();
 					}
 				}
-				netMap[i][j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.minGeoLat + b),
-						Angle.fromDegrees(data.minGeoLon + a));
+				elevationsMap[i][j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.getMinGeoLat() + b),
+						Angle.fromDegrees(data.getMinGeoLon() + a));
 			}
 		}
 
-        return netMap;
+        return elevationsMap;
 	}
 
-	protected Boolean[][] booleanNetMap() {
-		Boolean[][] booleanNetMap = new Boolean[data.length_tab - 1][data.width_tab];
+	protected Boolean[][] booleanElevationsMap() {
+		Boolean[][] booleanElevationsMap = new Boolean[data.getLengthTab() - 1][data.getWidthTab()];
 
-		for (int i = 0; i <= booleanNetMap.length - 1; i++) {
-			for (int j = 0; j <= booleanNetMap[i].length - 1; j++) {
-				booleanNetMap[i][j] = false;
+		for (int i = 0; i <= booleanElevationsMap.length - 1; i++) {
+			for (int j = 0; j <= booleanElevationsMap[i].length - 1; j++) {
+				booleanElevationsMap[i][j] = false;
 			}
 		}
-		return booleanNetMap;
+		return booleanElevationsMap;
 	}
 
-	public Boolean[][] createWaterTab() {	
-		Boolean[][] waterDirection = new Boolean[data.length_tab - 1][data.width_tab];
+	public Boolean[][] waterDirectionMap() {	
+		Boolean[][] waterDirectionMap = new Boolean[data.getLengthTab() - 1][data.getWidthTab()];
 
-		for (int i = 0; i <= waterDirection.length - 1; i++) {
-			for (int j = 0; j <= waterDirection[i].length - 1; j++) {
-				waterDirection[i][j] = false;
+		for (int i = 0; i <= waterDirectionMap.length - 1; i++) {
+			for (int j = 0; j <= waterDirectionMap[i].length - 1; j++) {
+				waterDirectionMap[i][j] = false;
 			}
 		}
-		return waterDirection;
+		return waterDirectionMap;
 	}
 
 }

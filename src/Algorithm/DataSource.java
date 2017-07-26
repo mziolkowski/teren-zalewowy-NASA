@@ -3,125 +3,257 @@ import java.util.Scanner;
 
 public class DataSource {
 	
-	double slat = 43.0; 							// szerokosc geo. zr. wody
-	double slon = -122.10;							// dlugosc geo. zr. wody
-	double rtwsp_geo_lat = 43.1;					// szerokosc geo. prawego-dolnego rogu analizowanego obszaru
-	double rtwsp_geo_lon = -122.2;					// dlugosc geo. prawego-dolnego rogu analizowanego obszaru
-	double lbwsp_geo_lat = 42.9;					// szerokosc geo. lewego-gornego rogu analizowanego obszaru
-	double lbwsp_geo_lon = -122.0;					// dlugosc geo. lewego-gornego rogu analizowanego obszaru
-	double swsp_geo = 1888;						// wysokosc zr. wody
-	int length_tab;						//dlugosc tablicy
-	int width_tab;						//szerokosc tablicy
-	double slatInter;
-	double slonInter;	
-	double lbwsp_geo_lat_source;
-	double lbwsp_geo_lon_source;
-	double rtwsp_geo_lat_source;
-	double rtwsp_geo_lon_source;
-	double slat_source;
-	double slon_source;
-	double minGeoLat;
-	double maxGeoLat;
-	double minGeoLon;
-	double maxGeoLon;
+	private double waterPointLat; 							// szerokosc geo. zr. wody
+	private double waterPointLon;							// dlugosc geo. zr. wody
+	private double rightTopPointLat;						// szerokosc geo. prawego-g髍ngo rogu analizowanego obszaru
+	private double rightTopPointLon;						// dlugosc geo. prawego-g髍nego rogu analizowanego obszaru
+	private double leftBottomPointLat;						// szerokosc geo. lewego-dolnego rogu analizowanego obszaru
+	private double leftBottomPointLon;						// dlugosc geo. lewego-dolnego rogu analizowanego obszaru
+	private double sourceWaterHeight;						// wysokosc zr. wody
+	private int lengthTab;									// dlugosc tablicy
+	private int widthTab;									// szerokosc tablicy
+	private double slatIteration;							// licznik s硊抗cy do przeuni阠ia punkt體 tablicy
+	private double slonIteration;							// licznik s硊抗cy do przeuni阠ia punkt體 tablicy
+	private double leftBottomPointLatSource;				// szerokosc geo. lewego-dolnego rogu analizowanego obszaru zgodna z mapa
+	private double leftBottomPointLonSource;				// dlugosc geo. lewego-dolnego rogu analizowanego obszaru zgodna z mapa
+	private double rightTopPointLatSource;					// szerokosc geo. prawego-g髍ngo rogu analizowanego obszaru zgodna z mapa
+	private double rightTopPointLonSource;					// dlugosc geo. prawego-g髍nego rogu analizowanego obszaru zgodna z mapa
+	private double waterSourcePointLat;						// szerokosc geo. zr. wody zgodna z mapa
+	private double waterSourcePointLon;						// dlugosc geo. zr. wody zgodna z mapa
+	private double minGeoLat;								// min. wartosc szerokosci obszaru
+	private double maxGeoLat;								// max. wartosc szerokosci obszaru
+	private double minGeoLon;								// min. wartosc d硊gosci obszaru
+	private double maxGeoLon;								// max. wartosc d硊gosci obszaru
 
 
 public DataSource makeData() {
 	
 	Scanner scan = new Scanner(System.in);
 		//Wskazanie lewego-dolnego punktu
-//		System.out.println("Podaj szerokosc geograficzna lewego-dolnego punktu");
-//		lbwsp_geo_lat = scan.nextDouble();
-		lbwsp_geo_lat_source = lbwsp_geo_lat;
-//		System.out.println("Podaj dlugosc geograficzna lewego-dolnego punkty");
-//		lbwsp_geo_lon = scan.nextDouble();
-		lbwsp_geo_lon_source = lbwsp_geo_lon;
+		System.out.println("Podaj szerokosc geograficzna lewego-dolnego punktu");
+		leftBottomPointLat = scan.nextDouble();
+		setLeftBottomPointLatSource(leftBottomPointLat);
+		System.out.println("Podaj dlugosc geograficzna lewego-dolnego punkty");
+		leftBottomPointLon = scan.nextDouble();
+		setLeftBottomPointLonSource(leftBottomPointLon);
 		
 //		//Wskazanie prawego-gornego punktu
-//		System.out.println("Podaj szerokosc geograficzna prawego-g贸rnego punktu");
-//		rtwsp_geo_lat = scan.nextDouble();
-		rtwsp_geo_lat_source = rtwsp_geo_lat;
-//		System.out.println("Podaj dlugosc geograficzna prawego-g贸rnego punkty");
-//		rtwsp_geo_lon = scan.nextDouble();
-		rtwsp_geo_lon_source = rtwsp_geo_lon;
+		System.out.println("Podaj szerokosc geograficzna prawego-g贸rnego punktu");
+		rightTopPointLat = scan.nextDouble();
+		setRightTopPointLatSource(rightTopPointLat);
+		System.out.println("Podaj dlugosc geograficzna prawego-g贸rnego punkty");
+		rightTopPointLon = scan.nextDouble();
+		setRightTopPointLonSource(rightTopPointLon);
 				
 //		//Wskazanie punktu zr. wody
-//		System.out.println("Podaj szerokosc geograficzna zr. wody z zakresu " + lbwsp_geo_lat + " " + rtwsp_geo_lat );
-//		slat = scan.nextDouble();
-		slat_source = slat;
-//		System.out.println("Podaj dlugosc geograficzna zr. wody z zakresu " + lbwsp_geo_lon + " " + rtwsp_geo_lon);
-//		slon = scan.nextDouble();
-		slon_source = slon;
+		System.out.println("Podaj szerokosc geograficzna zr. wody z zakresu " + leftBottomPointLat + " " + rightTopPointLat );
+		setWaterPointLat(scan.nextDouble());
+		setWaterSourcePointLat(getWaterPointLat());
+		System.out.println("Podaj dlugosc geograficzna zr. wody z zakresu " + leftBottomPointLon + " " + rightTopPointLon);
+		setWaterPointLon(scan.nextDouble());
+		setWaterSourcePointLon(getWaterPointLon());
 //				
-//		System.out.println("Podaj wysokosc zr锟絛锟絘 wody");
-//		swsp_geo = scan.nextInt();
+		System.out.println("Podaj wysokosc zr锟絛锟絘 wody");
+		setSourceWaterHeight(scan.nextInt());
 		
 		
 		//Okreslenie wymiaru tablicy
-		if(rtwsp_geo_lat < lbwsp_geo_lat) {
+		if(rightTopPointLat < leftBottomPointLat) {
 			do{
-				rtwsp_geo_lat += 0.001;
-				length_tab = length_tab + 1;
-			}while (rtwsp_geo_lat <= lbwsp_geo_lat);
+				rightTopPointLat += 0.001;
+				setLengthTab(getLengthTab() + 1);
+			}while (rightTopPointLat <= leftBottomPointLat);
 			
 		} else {
 			do{
-				lbwsp_geo_lat += 0.001;
-				length_tab = length_tab + 1;
-			}while (lbwsp_geo_lat <= rtwsp_geo_lat);
+				leftBottomPointLat += 0.001;
+				setLengthTab(getLengthTab() + 1);
+			}while (leftBottomPointLat <= rightTopPointLat);
 		}	
 		
-		if(rtwsp_geo_lon < lbwsp_geo_lon) {
+		if(rightTopPointLon < leftBottomPointLon) {
 			do{
-				rtwsp_geo_lon += 0.001;
-				width_tab = width_tab + 1;
-			}while (rtwsp_geo_lon <= lbwsp_geo_lon);
+				rightTopPointLon += 0.001;
+				setWidthTab(getWidthTab() + 1);
+			}while (rightTopPointLon <= leftBottomPointLon);
 			
 		} else {
 			do{
-				lbwsp_geo_lon += 0.001;
-				width_tab = width_tab + 1;
-			}while (lbwsp_geo_lon <= rtwsp_geo_lon);
+				leftBottomPointLon += 0.001;
+				setWidthTab(getWidthTab() + 1);
+			}while (leftBottomPointLon <= rightTopPointLon);
 		}
 		
 
-		for(double i = slat; i <= rtwsp_geo_lat; i += 0.001) {
-			slatInter++;
+		for(double i = getWaterPointLat(); i <= rightTopPointLat; i += 0.001) {
+			slatIteration++;
 		}
 		
-		for(double j = slon; j <= rtwsp_geo_lon; j += 0.001) {
-			slonInter++;
+		for(double j = getWaterPointLon(); j <= rightTopPointLon; j += 0.001) {
+			slonIteration++;
 		}
 		
 		
 		//Przesuniecie tabicy do wsp. 0,0
-		lbwsp_geo_lat = 0;
-		lbwsp_geo_lon = 0;
+		leftBottomPointLat = 0;
+		leftBottomPointLon = 0;
 		
-		rtwsp_geo_lat = lbwsp_geo_lat + width_tab;
-		rtwsp_geo_lon = lbwsp_geo_lon + length_tab;
+		rightTopPointLat = leftBottomPointLat + getWidthTab();
+		rightTopPointLon = leftBottomPointLon + getLengthTab();
 		
-		slat = rtwsp_geo_lat - slatInter;
-		slon = rtwsp_geo_lon - slonInter;
+		setWaterPointLat(rightTopPointLat - slatIteration);
+		setWaterPointLon(rightTopPointLon - slonIteration);
 		
-		if (rtwsp_geo_lat_source > lbwsp_geo_lat_source) {
-			maxGeoLat = rtwsp_geo_lat_source;
-			minGeoLat = lbwsp_geo_lat_source;
+		if (getRightTopPointLatSource() > getLeftBottomPointLatSource()) {
+			maxGeoLat = getRightTopPointLatSource();
+			setMinGeoLat(getLeftBottomPointLatSource());
 		} else {
-			maxGeoLat = lbwsp_geo_lat_source;
-			minGeoLat = rtwsp_geo_lat_source;
+			maxGeoLat = getLeftBottomPointLatSource();
+			setMinGeoLat(getRightTopPointLatSource());
 		}
 
-		if (rtwsp_geo_lon_source > lbwsp_geo_lon_source) {
-			maxGeoLon = rtwsp_geo_lon_source;
-			minGeoLon = lbwsp_geo_lon_source;
+		if (getRightTopPointLonSource() > getLeftBottomPointLonSource()) {
+			maxGeoLon = getRightTopPointLonSource();
+			setMinGeoLon(getLeftBottomPointLonSource());
 		} else {
-			maxGeoLon = lbwsp_geo_lon_source;
-			minGeoLon = rtwsp_geo_lon_source;
+			maxGeoLon = getLeftBottomPointLonSource();
+			setMinGeoLon(getRightTopPointLonSource());
 		}
 		
 		return this;
 	
 	}
+
+
+public double getWaterPointLat() {
+	return waterPointLat;
+}
+
+
+public void setWaterPointLat(double waterPointLat) {
+	this.waterPointLat = waterPointLat;
+}
+
+
+public double getWaterPointLon() {
+	return waterPointLon;
+}
+
+
+public void setWaterPointLon(double waterPointLon) {
+	this.waterPointLon = waterPointLon;
+}
+
+
+public int getLengthTab() {
+	return lengthTab;
+}
+
+
+public void setLengthTab(int lengthTab) {
+	this.lengthTab = lengthTab;
+}
+
+
+public int getWidthTab() {
+	return widthTab;
+}
+
+
+public void setWidthTab(int widthTab) {
+	this.widthTab = widthTab;
+}
+
+
+public double getWaterSourcePointLat() {
+	return waterSourcePointLat;
+}
+
+
+public void setWaterSourcePointLat(double waterSourcePointLat) {
+	this.waterSourcePointLat = waterSourcePointLat;
+}
+
+
+public double getWaterSourcePointLon() {
+	return waterSourcePointLon;
+}
+
+
+public void setWaterSourcePointLon(double waterSourcePointLon) {
+	this.waterSourcePointLon = waterSourcePointLon;
+}
+
+
+public double getSourceWaterHeight() {
+	return sourceWaterHeight;
+}
+
+
+public void setSourceWaterHeight(double sourceWaterHeight) {
+	this.sourceWaterHeight = sourceWaterHeight;
+}
+
+
+public double getMinGeoLon() {
+	return minGeoLon;
+}
+
+
+public void setMinGeoLon(double minGeoLon) {
+	this.minGeoLon = minGeoLon;
+}
+
+
+public double getMinGeoLat() {
+	return minGeoLat;
+}
+
+
+public void setMinGeoLat(double minGeoLat) {
+	this.minGeoLat = minGeoLat;
+}
+
+
+public double getRightTopPointLatSource() {
+	return rightTopPointLatSource;
+}
+
+
+public void setRightTopPointLatSource(double rightTopPointLatSource) {
+	this.rightTopPointLatSource = rightTopPointLatSource;
+}
+
+
+public double getLeftBottomPointLatSource() {
+	return leftBottomPointLatSource;
+}
+
+
+public void setLeftBottomPointLatSource(double leftBottomPointLatSource) {
+	this.leftBottomPointLatSource = leftBottomPointLatSource;
+}
+
+
+public double getRightTopPointLonSource() {
+	return rightTopPointLonSource;
+}
+
+
+public void setRightTopPointLonSource(double rightTopPointLonSource) {
+	this.rightTopPointLonSource = rightTopPointLonSource;
+}
+
+
+public double getLeftBottomPointLonSource() {
+	return leftBottomPointLonSource;
+}
+
+
+public void setLeftBottomPointLonSource(double leftBottomPointLonSource) {
+	this.leftBottomPointLonSource = leftBottomPointLonSource;
+}
+
+
 
 }

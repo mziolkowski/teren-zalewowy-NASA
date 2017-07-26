@@ -14,24 +14,23 @@ public class ImplementationOfAlgorithm {
 		algorithm.startCalculation();
 		
 		dataHolder.setStartPosition(algorithm.getStartPosition());
-		dataHolder.setWaterDirection(algorithm.getWaterDirections());
+		dataHolder.setWaterDirectionMap(algorithm.getWaterDirectionMap());
 		dataHolder.setMaxMinLatLon(algorithm.getMaxMinLatLon());
-		dataHolder.setWetList(algorithm.getWetList());
-		dataHolder.setListOfPointsCopy(algorithm.getListOfPointsCopy());
-		dataHolder.setWetListCopy(algorithm.getWetListCopy());
-		dataHolder.setCoordinateList(algorithm.getCoordinateList());
-		dataHolder.setLength_tab(algorithm.getLengthTab());
-		dataHolder.setWidth_tab(algorithm.getWidthTab());
-		dataHolder.setSlat_source(algorithm.getSlat_source());
-		dataHolder.setSlon_source(algorithm.getSlon_source());
-		dataHolder.setNetMap(algorithm.getNetMap());
+		dataHolder.setListOfFloodValue(algorithm.getListOfFloodValue());
+		dataHolder.setListOfFloodCoordinateCopy(algorithm.getListOfFloodCoordinateCopy());
+		dataHolder.setListOfFloodValueCopy(algorithm.getListOfFloodValueCopy());
+		dataHolder.setCoordinateListDouble(algorithm.getCoordinateListDouble());
+		dataHolder.setLengthTab(algorithm.getLengthTab());
+		dataHolder.setWidthTab(algorithm.getWidthTab());
+		dataHolder.setWaterSourcePointLat(algorithm.getWaterSourcePointLat());
+		dataHolder.setWaterSourcePointLon(algorithm.getWaterSourcePointLon());
+		dataHolder.setElevationsMap(algorithm.getElevationsMap());
 		
-		ArrayList<Double> coordinateList = algorithm.getCoordinateList();
-		ArrayList<Double> wetList = algorithm.getWetList();
-		ArrayList<Double> wetListCopy = algorithm.getWetListCopy();
-		Boolean[][] waterDirection2 = algorithm.getWaterDirections();
+		ArrayList<Double> coordinateListDouble = algorithm.getCoordinateListDouble();
+		ArrayList<Double> listOfFloodValue = algorithm.getListOfFloodValue();
+		Boolean[][] waterDirectionMap = algorithm.getWaterDirectionMap();
 		ArrayList<Integer> coordinateListInteger = algorithm.getCoordinateListInteger();
-		Double[][] netMap = algorithm.getNetMap();
+		Double[][] elevationsMap = algorithm.getElevationsMap();
 			
 		return dataHolder;
 

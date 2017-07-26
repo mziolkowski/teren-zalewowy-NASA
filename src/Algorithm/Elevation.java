@@ -24,8 +24,8 @@ public class Elevation {
 	public double[] getElevationMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 
-		for (double i = 0, a = 0; i < dataHolder.getLength_tab(); i++, a += 0.001) {
-			for (double j = 0, b = 0; j < dataHolder.getWidth_tab(); j++, b += 0.001) {
+		for (double i = 0, a = 0; i < dataHolder.getLengthTab(); i++, a += 0.001) {
+			for (double j = 0, b = 0; j < dataHolder.getWidthTab(); j++, b += 0.001) {
 
 				latlons.add(LatLon.fromDegrees(dataHolder.getMaxMinLatLon().getMin().getLat() + a,
 						dataHolder.getMaxMinLatLon().getMin().getLon() + b));

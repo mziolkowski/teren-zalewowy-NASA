@@ -12,24 +12,24 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	private Maps maps;
 	private DataSource data;
 	private WorldWindow wwd;
-	private double slat; 						
-	private double slon;	
-	private double swsp_geo;
+	private double waterPointLat; 						
+	private double waterPointLon;	
+	private double sourceWaterHeight;
 	private int lengthTab;						
 	private int widthTab;
-	private Boolean[][] waterDirection;
-	private ArrayList<Double> coordinateList;
-	private ArrayList<Double> wetListCopy;
-	private ArrayList<Double> listOfPointsCopy;
-	private ArrayList<Double> wetList;
+	private Boolean[][] waterDirectionMap;
+	private ArrayList<Double> coordinateListDouble;
+	private ArrayList<Double> listOfFloodValueCopy;
+	private ArrayList<Double> listOfFloodCoordinateCopy;
+	private ArrayList<Double> listOfFloodValue;
 	private ArrayList<Integer> coordinateListInteger;
-	private Double[][] netMap;
+	private Double[][] elevationsMap;
 	private double maxGeoLat;
 	private double minGeoLat;
 	private double maxGeoLon;
 	private double minGeoLon;
-	private double slat_source;
-	private double slon_source;
+	private double waterSourcePointLat;
+	private double waterSourcePointLon;
 	
 	public Algorithm() {
 		super();
@@ -40,38 +40,38 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 		data = new DataSource();
 		data.makeData();
 		this.maps = new Maps(data, this.getWwd());
-		slat = data.slat;
-		slon = data.slon;
-		lengthTab = data.length_tab;
-		widthTab = data.width_tab;
-		slat_source = data.slat_source;
-		slon_source = data.slon_source;
-		swsp_geo = data.swsp_geo;
+		waterPointLat = data.getWaterPointLat();
+		waterPointLon = data.getWaterPointLon();
+		lengthTab = data.getLengthTab();
+		widthTab = data.getWidthTab();
+		waterSourcePointLat = data.getWaterSourcePointLat();
+		waterSourcePointLon = data.getWaterSourcePointLon();
+		sourceWaterHeight = data.getSourceWaterHeight();
 	}
 	
 	
-	public Double[][] getNetMap() {
-		return netMap;
+	public Double[][] getElevationsMap() {
+		return elevationsMap;
 	}
 
 	public ArrayList<Integer> getCoordinateListInteger() {
 		return coordinateListInteger;
 	}
 
-	public ArrayList<Double> getWetListCopy() {
-		return wetListCopy;
+	public ArrayList<Double> getListOfFloodValueCopy() {
+		return listOfFloodValueCopy;
 	}
 
-	public ArrayList<Double> getListOfPointsCopy() {
-		return listOfPointsCopy;
+	public ArrayList<Double> getListOfFloodCoordinateCopy() {
+		return listOfFloodCoordinateCopy;
 	}
 
-	public double getSlat_source() {
-		return slat_source;
+	public double getWaterSourcePointLat() {
+		return waterSourcePointLat;
 	}
 
-	public double getSlon_source() {
-		return slon_source;
+	public double getWaterSourcePointLon() {
+		return waterSourcePointLon;
 	}
 
 	public int getLengthTab() {
@@ -83,41 +83,40 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	}
 
 	public PositionHolder getStartPosition() {
-		return new PositionHolder(slat, slon);
+		return new PositionHolder(waterPointLat, waterPointLon);
 	}
 
-	public Boolean[][] getWaterDirections() {
-		return waterDirection;
+	public Boolean[][] getWaterDirectionMap() {
+		return waterDirectionMap;
 	}
 
-	public ArrayList<Double> getWetList() {
-		return wetList;
+	public ArrayList<Double> getListOfFloodValue() {
+		return listOfFloodValue;
 	}
 
-	public ArrayList<Double> getCoordinateList() {
-		return coordinateList;
+	public ArrayList<Double> getCoordinateListDouble() {
+		return coordinateListDouble;
 	}
 
-	public void calculation(ArrayList<Integer> coordinateListInteger, ArrayList<Double> wetList, ArrayList<Double> listOfPoints, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetListInteger, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPointsInteger, Boolean[][] waterDirection2) {
+	public void calculation(ArrayList<Integer> coordinateListInteger, Double[][] elevationsMap, ArrayList<Double> coordinateListDouble, ArrayList<Double> listOfFloodValue, Boolean[][] booleanElevationsMap, ArrayList<Double> listOfFloodCoordinate, Boolean[][] waterDirectionMap) {
+		booleanElevationsMap[(int) abs(waterPointLat)][(int) abs(waterPointLon)] = true;
+		waterDirectionMap[(int) abs(waterPointLat)][(int) abs(waterPointLon)] = true;
 		
-		bolleanNetMap3[(int) abs(slat)][(int) abs(slon)] = true;
-		waterDirection2[(int) abs(slat)][(int) abs(slon)] = true;
-		
-		for(int i = 0; i < list2.size(); i += 2) {
+		for(int i = 0; i < coordinateListDouble.size(); i += 2) {
 			
-			if(netMap3[(int) (abs(slat) - coordinateListInteger.get(i)) ][(int) (abs(slon) - coordinateListInteger.get(i + 1)) ] < swsp_geo) {
+			if(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i)) ][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1)) ] < sourceWaterHeight) {
 				
-				listOfPointsInteger.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
-				wetListInteger.add((slat - coordinateListInteger.get(i)));	//wps. X nowego zalanego punktu
-				wetListInteger.add((slon - coordinateListInteger.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				listOfPoints.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
-				wetList.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
-				wetList.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
-				waterDirection2[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+				listOfFloodCoordinate.add(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))]);
+				listOfFloodValue.add((waterPointLat - coordinateListInteger.get(i)));	//wps. X nowego zalanego punktu
+				listOfFloodValue.add((waterPointLon - coordinateListInteger.get(i + 1)));	//wsp. Y nowego zalanego punktu
+				listOfFloodCoordinate.add(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))]);
+				listOfFloodValue.add((waterSourcePointLat - coordinateListDouble.get(i)));	//wps. X nowego zalanego punktu
+				listOfFloodValue.add((waterSourcePointLon - coordinateListDouble.get(i + 1)));	//wsp. Y nowego zalanego punktu
+				booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
+				waterDirectionMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
 									
 			} else {
-				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+				booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
 			}
 		}
 //		System.out.println(listOfPointsInteger + " Punkty zalane");
@@ -126,34 +125,34 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 
 }
 
-public void calculation2(ArrayList<Integer> coordinateListInteger, ArrayList<Double> wetList, ArrayList<Double> listOfPoints, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetListInteger, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPointsInteger, Boolean[][] waterDirection2) {
+public void calculation2(ArrayList<Integer> coordinateListInteger, Double[][] elevationsMap, ArrayList<Double> coordinateListDouble, ArrayList<Double> listOfFloodValue, Boolean[][] booleanElevationsMap, ArrayList<Double> listOfFloodCoordinate, Boolean[][] waterDirectionMap) {
 	
-	slat = wetListInteger.get(0);
-	slon = wetListInteger.get(1);
-	listOfPointsInteger.remove(0);
-	wetListInteger.remove(1);
-	wetListInteger.remove(0);
+	waterPointLat = listOfFloodValue.get(0);
+	waterPointLon = listOfFloodValue.get(1);
+	listOfFloodCoordinate.remove(0);
+	listOfFloodValue.remove(1);
+	listOfFloodValue.remove(0);
 
 	
-	for(int i = 0; i < list2.size(); i += 2) {
+	for(int i = 0; i < coordinateListDouble.size(); i += 2) {
 		try {
-			if(bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] == false) {
-				if(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] < swsp_geo) {
+			if(booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] == false) {
+				if(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] < sourceWaterHeight) {
 					
-						listOfPointsInteger.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
-						wetListInteger.add(slat - coordinateListInteger.get(i));
-						wetListInteger.add(slon - coordinateListInteger.get(i + 1));
-						listOfPoints.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
-						wetList.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
-						wetList.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-						bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
-						waterDirection2[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+						listOfFloodCoordinate.add(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))]);
+						listOfFloodValue.add(waterPointLat - coordinateListInteger.get(i));
+						listOfFloodValue.add(waterPointLon - coordinateListInteger.get(i + 1));
+						listOfFloodCoordinate.add(elevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))]);
+						listOfFloodValue.add((waterSourcePointLat - coordinateListDouble.get(i)));	//wps. X nowego zalanego punktu
+						listOfFloodValue.add((waterSourcePointLon - coordinateListDouble.get(i + 1)));	//wsp. Y nowego zalanego punktu
+						booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
+						waterDirectionMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
 				} else {
-					bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+					booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
 				}
 											
 			} else {
-				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+				booleanElevationsMap[(int) (abs(waterPointLat) - coordinateListInteger.get(i))][(int) (abs(waterPointLon) - coordinateListInteger.get(i + 1))] = true;
 			}
 		}
 			
@@ -170,59 +169,42 @@ public void calculation2(ArrayList<Integer> coordinateListInteger, ArrayList<Dou
 }
 
 public void startCalculation() {
-	Double[][] netMap3 = maps.netMap();
-	ArrayList<Double> list2 = maps.CoordinateList();
-	ArrayList<Double> wetListCopy2 = maps.wetPointsCopy();
-	ArrayList<Double> listOfPointsCopy2 = maps.listOfPointsCopy();
-	ArrayList<Double> wetList2 = maps.wetPoints();
-	Boolean[][] bolleanNetMap3 = maps.booleanNetMap();
-	ArrayList<Double> listOfPoints2 = maps.listOfPoints();
-	Boolean[][] waterDirection2 = maps.createWaterTab();
-	ArrayList<Integer> coordinateListInteger = maps.CoordinateListInteger();
+	Double[][] elevationsMap = maps.elevationsMap();
+	ArrayList<Double> coordinateListDouble = maps.setCoordinateListDouble();
+	ArrayList<Double> listOfFloodValue = maps.listOfFloodValue();
+	Boolean[][] booleanElevationsMap = maps.booleanElevationsMap();
+	ArrayList<Double> listOfFloodCoordinate = maps.listOfFloodCoordinate();
+	Boolean[][] waterDirectionMap = maps.waterDirectionMap();
+	ArrayList<Integer> CoordinateListInteger = maps.setCoordinateListInteger();
 	
-	calculation(coordinateListInteger, listOfPointsCopy2, wetListCopy2, netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
+	calculation(CoordinateListInteger, elevationsMap, coordinateListDouble, listOfFloodValue, booleanElevationsMap, listOfFloodCoordinate, waterDirectionMap);
 	do {
-	calculation2(coordinateListInteger, listOfPointsCopy2, wetListCopy2, netMap3, list2, wetList2, bolleanNetMap3, listOfPoints2, waterDirection2);
-	} while (listOfPoints2.isEmpty() == false && wetList2.isEmpty() == false);
+	calculation2(CoordinateListInteger, elevationsMap, coordinateListDouble, listOfFloodValue, booleanElevationsMap, listOfFloodCoordinate, waterDirectionMap);
+	} while (listOfFloodCoordinate.isEmpty() == false && listOfFloodValue.isEmpty() == false);
 	
-	waterDirection = waterDirection2;
-	coordinateList = list2;
-	wetList = wetList2;
-	listOfPointsCopy = listOfPointsCopy2;
-	wetListCopy = wetListCopy2;
-	netMap = netMap3;
+	this.waterDirectionMap = waterDirectionMap;
+	this.coordinateListDouble = coordinateListDouble;
+	this.listOfFloodValue = listOfFloodValue;
+	this.elevationsMap = elevationsMap;
 	
-//	for(int m = 0; m < waterDirection2.length; m++) {
-//		for(int n = 0; n < waterDirection2[m].length; n++) 
-//			System.out.print(waterDirection2[m][n]?"#":"-" + " ");
-//			System.out.println(" ");
-//		
-//	}
-	
-//	for(int m = 0; m < netMap3.length; m++) {
-//		for(int n = 0; n < netMap3[m].length; n++) 
-//			System.out.print(netMap3[m][n] + " ");
-//			System.out.println(" ");
-//		
-//	}
 }
 
 public SectorData getMaxMinLatLon() {
 	
-	if (data.rtwsp_geo_lat_source > data.lbwsp_geo_lat_source) {
-		maxGeoLat = data.rtwsp_geo_lat_source;
-		minGeoLat = data.lbwsp_geo_lat_source;
+	if (data.getRightTopPointLatSource() > data.getLeftBottomPointLatSource()) {
+		maxGeoLat = data.getRightTopPointLatSource();
+		minGeoLat = data.getLeftBottomPointLatSource();
 	} else {
-		maxGeoLat = data.lbwsp_geo_lat_source;
-		minGeoLat = data.rtwsp_geo_lat_source;
+		maxGeoLat = data.getLeftBottomPointLatSource();
+		minGeoLat = data.getRightTopPointLatSource();
 	}
 
-	if (data.rtwsp_geo_lon_source > data.lbwsp_geo_lon_source) {
-		maxGeoLon = data.rtwsp_geo_lon_source;
-		minGeoLon = data.lbwsp_geo_lon_source;
+	if (data.getRightTopPointLonSource() > data.getLeftBottomPointLonSource()) {
+		maxGeoLon = data.getRightTopPointLonSource();
+		minGeoLon = data.getLeftBottomPointLonSource();
 	} else {
-		maxGeoLon = data.lbwsp_geo_lon_source;
-		minGeoLon = data.rtwsp_geo_lon_source;
+		maxGeoLon = data.getLeftBottomPointLonSource();
+		minGeoLon = data.getRightTopPointLonSource();
 	}
 	return new SectorData(new PositionHolder(minGeoLat, minGeoLon), new PositionHolder(maxGeoLat, maxGeoLon));
 	

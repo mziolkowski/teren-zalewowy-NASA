@@ -75,7 +75,7 @@ public class Imagery {
 						Angle.fromDegrees(dataHolder.getMaxMinLatLon().getMax().getLon()));
 				
 				
-				BufferedImage image = new BufferedImage(dataHolder.getLength_tab(), dataHolder.getWidth_tab(), BufferedImage.TYPE_INT_ARGB);
+				BufferedImage image = new BufferedImage(dataHolder.getLengthTab(), dataHolder.getWidthTab(), BufferedImage.TYPE_INT_ARGB);
 				SurfaceImage surfaceImage = new SurfaceImage(image, sector);
 
 				SwingUtilities.invokeLater(new Runnable() {
@@ -84,13 +84,9 @@ public class Imagery {
 						Color blueColor = new Color(0, 100, 250, 140);
 						Color transparentColor = new Color(0, 0, 0, 0);
 						
-						ArrayList<Double> wetList = dataHolder.getWetListCopy();
-						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
-						Double[][] netMap = dataHolder.getNetMap();
-						Boolean[][] waterDirection = dataHolder.getWaterDirections();
+						Boolean[][] waterDirection = dataHolder.getWaterDirectionMap();
 					
 						
-//						image.setRGB((int) dataHolder.getSlat_source(), (int) dataHolder.getSlon_source(),(Color.red.getRGB()));
 						for(int i = 0; i < waterDirection.length; i ++) {
 							for(int j = 0; j< waterDirection[i].length; j ++) {
 								if(waterDirection[i][waterDirection.length - 1 - j] == true ) {
