@@ -36,6 +36,7 @@ public class Imagery {
 //		protected Elevation elevation;
 		protected Maps maps;
 		private DataSource data;
+		private static int placemarkNr;
 		
 		public AppFrame() {
 			// Show the WAIT cursor because the import may take a while.
@@ -81,7 +82,7 @@ public class Imagery {
 					
 					public void run() {
 						Color blueColor = new Color(0, 100, 250, 140);
-						Color transparentColor = new Color(0, 0, 0, 1);
+						Color transparentColor = new Color(0, 0, 0, 0);
 						
 						ArrayList<Double> wetList = dataHolder.getWetListCopy();
 						ArrayList<Double> listOfPoints = dataHolder.getListOfPointsCopy();
@@ -89,10 +90,10 @@ public class Imagery {
 						Boolean[][] waterDirection = dataHolder.getWaterDirections();
 					
 						
-//						image.setRGB((int) dataHolder.getSlat(), (int) dataHolder.getSlon(),(Color.red.getRGB()));
+//						image.setRGB((int) dataHolder.getSlat_source(), (int) dataHolder.getSlon_source(),(Color.red.getRGB()));
 						for(int i = 0; i < waterDirection.length; i ++) {
 							for(int j = 0; j< waterDirection[i].length; j ++) {
-								if(waterDirection[j][i] == true ) {
+								if(waterDirection[i][waterDirection.length - 1 - j] == true ) {
 									image.setRGB(i, j,(blueColor.getRGB()));
 //									layer.addRenderable(surfaceImage);
 								} else {
@@ -136,7 +137,7 @@ public class Imagery {
 		private void putPlacemark(Position position, SurfaceImageLayer layer) {
 
             PointPlacemark pp = new PointPlacemark(position);
-            pp.setLabelText("Placemark A");
+            pp.setLabelText("Placemark " + ++placemarkNr);
             pp.setValue(AVKey.DISPLAY_NAME, "Clamp to ground, Label, Semi-transparent, Audio icon");
             pp.setLineEnabled(false);
             pp.setAltitudeMode(WorldWind.CLAMP_TO_GROUND);

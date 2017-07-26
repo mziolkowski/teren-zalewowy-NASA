@@ -2,7 +2,7 @@ package Algorithm;
 
 
 import java.util.ArrayList;
-
+import static java.lang.Math.*;
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
@@ -100,29 +100,29 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 
 	public void calculation(ArrayList<Integer> coordinateListInteger, ArrayList<Double> wetList, ArrayList<Double> listOfPoints, Double[][] netMap3, ArrayList<Double> list2, ArrayList<Double> wetListInteger, Boolean[][] bolleanNetMap3, ArrayList<Double> listOfPointsInteger, Boolean[][] waterDirection2) {
 		
-		bolleanNetMap3[(int) slat][(int) slon] = true;
-		waterDirection2[(int) slat][(int) slon] = true;
+		bolleanNetMap3[(int) abs(slat)][(int) abs(slon)] = true;
+		waterDirection2[(int) abs(slat)][(int) abs(slon)] = true;
 		
 		for(int i = 0; i < list2.size(); i += 2) {
 			
-			if(netMap3[(int) (slat - coordinateListInteger.get(i)) ][(int) (slon - coordinateListInteger.get(i + 1)) ] < swsp_geo) {
+			if(netMap3[(int) (abs(slat) - coordinateListInteger.get(i)) ][(int) (abs(slon) - coordinateListInteger.get(i + 1)) ] < swsp_geo) {
 				
-				listOfPointsInteger.add(netMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))]);
+				listOfPointsInteger.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
 				wetListInteger.add((slat - coordinateListInteger.get(i)));	//wps. X nowego zalanego punktu
 				wetListInteger.add((slon - coordinateListInteger.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				listOfPoints.add(netMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))]);
+				listOfPoints.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
 				wetList.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
 				wetList.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-				bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
-				waterDirection2[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
+				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+				waterDirection2[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
 									
 			} else {
-				bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
+				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
 			}
 		}
-		System.out.println(listOfPointsInteger + " Punkty zalane");
-		System.out.println(wetListInteger + " Wspolrzedne X i Y zalanych punktow");
-		System.out.println(" ");							
+//		System.out.println(listOfPointsInteger + " Punkty zalane");
+//		System.out.println(wetListInteger + " Wspolrzedne X i Y zalanych punktow");
+//		System.out.println(" ");							
 
 }
 
@@ -137,23 +137,23 @@ public void calculation2(ArrayList<Integer> coordinateListInteger, ArrayList<Dou
 	
 	for(int i = 0; i < list2.size(); i += 2) {
 		try {
-			if(bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] == false) {
-				if(netMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] < swsp_geo) {
+			if(bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] == false) {
+				if(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] < swsp_geo) {
 					
-						listOfPointsInteger.add(netMap3[(int) (slat_source - coordinateListInteger.get(i))][(int) (slon_source - coordinateListInteger.get(i + 1))]);
+						listOfPointsInteger.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
 						wetListInteger.add(slat - coordinateListInteger.get(i));
 						wetListInteger.add(slon - coordinateListInteger.get(i + 1));
-						listOfPoints.add(netMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))]);
+						listOfPoints.add(netMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))]);
 						wetList.add((slat_source - list2.get(i)));	//wps. X nowego zalanego punktu
 						wetList.add((slon_source - list2.get(i + 1)));	//wsp. Y nowego zalanego punktu
-						bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
-						waterDirection2[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
+						bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
+						waterDirection2[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
 				} else {
-					bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
+					bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
 				}
 											
 			} else {
-				bolleanNetMap3[(int) (slat - coordinateListInteger.get(i))][(int) (slon - coordinateListInteger.get(i + 1))] = true;
+				bolleanNetMap3[(int) (abs(slat) - coordinateListInteger.get(i))][(int) (abs(slon) - coordinateListInteger.get(i + 1))] = true;
 			}
 		}
 			
@@ -162,9 +162,9 @@ public void calculation2(ArrayList<Integer> coordinateListInteger, ArrayList<Dou
 			}
 		}
 	
-	System.out.println(listOfPointsInteger);
-	System.out.println(wetListInteger);
-	System.out.println(" ");
+//	System.out.println(listOfPointsInteger);
+//	System.out.println(wetListInteger);
+//	System.out.println(" ");
 
 	
 }
@@ -192,18 +192,19 @@ public void startCalculation() {
 	wetListCopy = wetListCopy2;
 	netMap = netMap3;
 	
-	for(int m = 0; m < waterDirection2.length; m++) {
-		for(int n = 0; n < waterDirection2[m].length; n++) 
-			System.out.print(waterDirection2[m][n] + " ");
-			System.out.println(" ");
-		
-	}
-	for(int m = 0; m < netMap3.length; m++) {
-		for(int n = 0; n < netMap3[m].length; n++) 
-			System.out.print(netMap3[m][n] + " ");
-			System.out.println(" ");
-		
-	}
+//	for(int m = 0; m < waterDirection2.length; m++) {
+//		for(int n = 0; n < waterDirection2[m].length; n++) 
+//			System.out.print(waterDirection2[m][n]?"#":"-" + " ");
+//			System.out.println(" ");
+//		
+//	}
+	
+//	for(int m = 0; m < netMap3.length; m++) {
+//		for(int n = 0; n < netMap3[m].length; n++) 
+//			System.out.print(netMap3[m][n] + " ");
+//			System.out.println(" ");
+//		
+//	}
 }
 
 public SectorData getMaxMinLatLon() {

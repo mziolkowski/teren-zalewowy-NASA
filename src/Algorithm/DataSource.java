@@ -3,13 +3,13 @@ import java.util.Scanner;
 
 public class DataSource {
 	
-	double slat; 							// szerokosc geo. zr. wody
-	double slon;							// dlugosc geo. zr. wody
-	double rtwsp_geo_lat;					// szerokosc geo. prawego-dolnego rogu analizowanego obszaru
-	double rtwsp_geo_lon;					// dlugosc geo. prawego-dolnego rogu analizowanego obszaru
-	double lbwsp_geo_lat;					// szerokosc geo. lewego-gornego rogu analizowanego obszaru
-	double lbwsp_geo_lon;					// dlugosc geo. lewego-gornego rogu analizowanego obszaru
-	double swsp_geo;						// wysokosc zr. wody
+	double slat = 43.0; 							// szerokosc geo. zr. wody
+	double slon = -122.10;							// dlugosc geo. zr. wody
+	double rtwsp_geo_lat = 43.1;					// szerokosc geo. prawego-dolnego rogu analizowanego obszaru
+	double rtwsp_geo_lon = -122.2;					// dlugosc geo. prawego-dolnego rogu analizowanego obszaru
+	double lbwsp_geo_lat = 42.9;					// szerokosc geo. lewego-gornego rogu analizowanego obszaru
+	double lbwsp_geo_lon = -122.0;					// dlugosc geo. lewego-gornego rogu analizowanego obszaru
+	double swsp_geo = 1888;						// wysokosc zr. wody
 	int length_tab;						//dlugosc tablicy
 	int width_tab;						//szerokosc tablicy
 	double slatInter;
@@ -30,31 +30,31 @@ public DataSource makeData() {
 	
 	Scanner scan = new Scanner(System.in);
 		//Wskazanie lewego-dolnego punktu
-		System.out.println("Podaj szerokosc geograficzna lewego-dolnego punktu");
-		lbwsp_geo_lat = scan.nextDouble();
+//		System.out.println("Podaj szerokosc geograficzna lewego-dolnego punktu");
+//		lbwsp_geo_lat = scan.nextDouble();
 		lbwsp_geo_lat_source = lbwsp_geo_lat;
-		System.out.println("Podaj dlugosc geograficzna lewego-dolnego punkty");
-		lbwsp_geo_lon = scan.nextDouble();
+//		System.out.println("Podaj dlugosc geograficzna lewego-dolnego punkty");
+//		lbwsp_geo_lon = scan.nextDouble();
 		lbwsp_geo_lon_source = lbwsp_geo_lon;
 		
-		//Wskazanie prawego-gornego punktu
-		System.out.println("Podaj szerokosc geograficzna prawego-górnego punktu");
-		rtwsp_geo_lat = scan.nextDouble();
+//		//Wskazanie prawego-gornego punktu
+//		System.out.println("Podaj szerokosc geograficzna prawego-górnego punktu");
+//		rtwsp_geo_lat = scan.nextDouble();
 		rtwsp_geo_lat_source = rtwsp_geo_lat;
-		System.out.println("Podaj dlugosc geograficzna prawego-górnego punkty");
-		rtwsp_geo_lon = scan.nextDouble();
+//		System.out.println("Podaj dlugosc geograficzna prawego-górnego punkty");
+//		rtwsp_geo_lon = scan.nextDouble();
 		rtwsp_geo_lon_source = rtwsp_geo_lon;
 				
-		//Wskazanie punktu zr. wody
-		System.out.println("Podaj szerokosc geograficzna zr. wody z zakresu " + lbwsp_geo_lat + " " + rtwsp_geo_lat );
-		slat = scan.nextDouble();
+//		//Wskazanie punktu zr. wody
+//		System.out.println("Podaj szerokosc geograficzna zr. wody z zakresu " + lbwsp_geo_lat + " " + rtwsp_geo_lat );
+//		slat = scan.nextDouble();
 		slat_source = slat;
-		System.out.println("Podaj dlugosc geograficzna zr. wody z zakresu " + lbwsp_geo_lon + " " + rtwsp_geo_lon);
-		slon = scan.nextDouble();
+//		System.out.println("Podaj dlugosc geograficzna zr. wody z zakresu " + lbwsp_geo_lon + " " + rtwsp_geo_lon);
+//		slon = scan.nextDouble();
 		slon_source = slon;
-				
-		System.out.println("Podaj wysokosc zr�d�a wody");
-		swsp_geo = scan.nextInt();
+//				
+//		System.out.println("Podaj wysokosc zr�d�a wody");
+//		swsp_geo = scan.nextInt();
 		
 		
 		//Okreslenie wymiaru tablicy

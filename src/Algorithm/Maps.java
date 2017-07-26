@@ -110,7 +110,7 @@ public class Maps  extends ApplicationTemplate.AppFrame{
 	public Double[][] netMap() {
 		ArrayList<LatLon> latlons = new ArrayList<LatLon>();
 		Globe globe = this.getWwd().getModel().getGlobe();
-        Double[][] netMap = new Double[data.length_tab - 1][data.width_tab - 1];
+        Double[][] netMap = new Double[data.length_tab - 1][data.width_tab];
         
         for (double i = 0, a = 0; i < data.length_tab; i++, a += 0.001) {
 			for (double j = 0, b = 0; j < data.width_tab; j++, b += 0.001) {
@@ -129,25 +129,29 @@ public class Maps  extends ApplicationTemplate.AppFrame{
         double targetResolution = globe.getElevationModel().getBestResolution(sector);
         double actualResolution = Double.MAX_VALUE;
         
-        for (double i = 0, a = 0; i <= netMap.length - 1; i++, a += 0.001) {
-			for (double j = 0, b = 0; j <= netMap[(int) i].length - 1; j++, b += 0.001) {
-				while (actualResolution > targetResolution)
-		        {
-		            actualResolution = globe.getElevations(sector, latlons, targetResolution, elevations);
-		            // Uncomment the two lines below if you want to watch the resolution converge
-//		            System.out.printf("Target resolution = %s, Actual resolution = %s\n",
-//		            Double.toString(targetResolution), Double.toString(actualResolution));
-		            try
-		            {
-		                Thread.sleep(200); // give the system a chance to retrieve data from the disk cache or the server
-		            }
-		            catch (InterruptedException e)
-		            {
-		                e.printStackTrace();
-		            }
-		        }
-				netMap[(int) i][(int) j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.lbwsp_geo_lat_source + b),
-						Angle.fromDegrees(data.lbwsp_geo_lon_source + a));
+        double a = 0;
+        double b = 0;
+        
+        
+		for (int i = 0; i <= netMap.length - 1; i++, a += 0.001) {
+			b = 0;
+			for (int j = 0; j <= netMap[i].length - 1; j++, b += 0.001) {
+				while (actualResolution > targetResolution) {
+					actualResolution = globe.getElevations(sector, latlons, targetResolution, elevations);
+					// Uncomment the two lines below if you want to watch the
+					// resolution converge
+//					System.out.printf("Target resolution = %s, Actual resolution = %s\n",
+//							Double.toString(targetResolution), Double.toString(actualResolution));
+					try {
+						Thread.sleep(2); // give the system a chance to
+											// retrieve data from the disk cache
+											// or the server
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				netMap[i][j] = this.wwd.getModel().getGlobe().getElevation(Angle.fromDegrees(data.minGeoLat + b),
+						Angle.fromDegrees(data.minGeoLon + a));
 			}
 		}
 
@@ -158,18 +162,18 @@ public class Maps  extends ApplicationTemplate.AppFrame{
 		Boolean[][] booleanNetMap = new Boolean[data.length_tab - 1][data.width_tab];
 
 		for (int i = 0; i <= booleanNetMap.length - 1; i++) {
-			for (int j = 0; j <= booleanNetMap.length - 1; j++) {
+			for (int j = 0; j <= booleanNetMap[i].length - 1; j++) {
 				booleanNetMap[i][j] = false;
 			}
 		}
 		return booleanNetMap;
 	}
 
-	public Boolean[][] createWaterTab() {
+	public Boolean[][] createWaterTab() {	
 		Boolean[][] waterDirection = new Boolean[data.length_tab - 1][data.width_tab];
 
 		for (int i = 0; i <= waterDirection.length - 1; i++) {
-			for (int j = 0; j <= waterDirection.length - 1; j++) {
+			for (int j = 0; j <= waterDirection[i].length - 1; j++) {
 				waterDirection[i][j] = false;
 			}
 		}
