@@ -10,6 +10,8 @@ public class ImplementationOfAlgorithm {
 		DataHolder dataHolder = new DataHolder();
 		Algorithm algorithm = new Algorithm();
 		
+		dataHolder.setWaterPointLat(algorithm.getWaterPointLat());
+		dataHolder.setWaterPointLon(algorithm.getWaterPointLon());
 		
 		algorithm.startCalculation();
 		

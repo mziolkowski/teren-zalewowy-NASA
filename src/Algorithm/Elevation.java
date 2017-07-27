@@ -48,7 +48,7 @@ public class Elevation {
 			sb.append("\n").append(e);
 		}
 
-//		Logging.logger().info(sb.toString());
+		Logging.logger().info(sb.toString());
 		
 		return elevations;
 	}

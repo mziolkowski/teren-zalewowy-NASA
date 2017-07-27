@@ -1,19 +1,19 @@
 package Algorithm;
 
+import static java.lang.Math.abs;
 
 import java.util.ArrayList;
-import static java.lang.Math.*;
+import gov.nasa.worldwind.util.Logging;
+
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwindx.examples.ApplicationTemplate;
+import sun.util.logging.resources.logging;
 
 public class Algorithm extends ApplicationTemplate.AppFrame{
 	
 	private Maps maps;
 	private DataSource data;
 	private WorldWindow wwd;
-	private double waterPointLat; 						
-	private double waterPointLon;	
 	private double sourceWaterHeight;
 	private int lengthTab;						
 	private int widthTab;
@@ -30,6 +30,8 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 	private double minGeoLon;
 	private double waterSourcePointLat;
 	private double waterSourcePointLon;
+	private double waterPointLat; 						
+	private double waterPointLon;	
 	
 	public Algorithm() {
 		super();
@@ -40,16 +42,24 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 		data = new DataSource();
 		data.makeData();
 		this.maps = new Maps(data, this.getWwd());
-		waterPointLat = data.getWaterPointLat();
-		waterPointLon = data.getWaterPointLon();
 		lengthTab = data.getLengthTab();
 		widthTab = data.getWidthTab();
 		waterSourcePointLat = data.getWaterSourcePointLat();
 		waterSourcePointLon = data.getWaterSourcePointLon();
+		waterPointLat = data.getWaterPointLat();
+		waterPointLon = data.getWaterPointLon();
 		sourceWaterHeight = data.getSourceWaterHeight();
 	}
 	
 	
+	public double getWaterPointLat() {
+		return waterPointLat;
+	}
+
+	public double getWaterPointLon() {
+		return waterPointLon;
+	}
+
 	public Double[][] getElevationsMap() {
 		return elevationsMap;
 	}
@@ -126,12 +136,15 @@ public class Algorithm extends ApplicationTemplate.AppFrame{
 }
 
 public void calculation2(ArrayList<Integer> coordinateListInteger, Double[][] elevationsMap, ArrayList<Double> coordinateListDouble, ArrayList<Double> listOfFloodValue, Boolean[][] booleanElevationsMap, ArrayList<Double> listOfFloodCoordinate, Boolean[][] waterDirectionMap) {
-	
+	try {
 	waterPointLat = listOfFloodValue.get(0);
 	waterPointLon = listOfFloodValue.get(1);
 	listOfFloodCoordinate.remove(0);
 	listOfFloodValue.remove(1);
 	listOfFloodValue.remove(0);
+	} catch (IndexOutOfBoundsException e){
+		Logging.logger().info("Podana wysokoœæ wody jest mniejsza od wysokoœci zród³a wody! \n");
+	}
 
 	
 	for(int i = 0; i < coordinateListDouble.size(); i += 2) {
@@ -157,7 +170,7 @@ public void calculation2(ArrayList<Integer> coordinateListInteger, Double[][] el
 		}
 			
 		catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Wyszedles po za obszar!");		
+			Logging.logger().info("Wyszed³eœ po za obszar!\n");		
 			}
 		}
 	
